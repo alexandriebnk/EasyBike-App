@@ -1,0 +1,36 @@
+{
+  "name": "easybike-app",
+  "version": "1.0.0",
+  "description": "EasyBike-App",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open",
+    "sass": "sass --watch ./src/sass/main.scss:./dist/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandriebnk/EasyBike-App.git"
+  },
+  "author": "Alexandrie Benkiki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexandriebnk/EasyBike-App/issues"
+  },
+  "homepage": "https://github.com/alexandriebnk/EasyBike-App#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^9.0.3",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}
