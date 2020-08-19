@@ -1,0 +1,93 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+@media only screen and (max-width: 75em) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media only screen and (max-width: 56.25em) {
+  html {
+    font-size: 50%;
+  }
+}
+@media only screen and (max-width: 112.5em) {
+  html {
+    font-size: 75%;
+  }
+}
+
+body {
+  box-sizing: border-box;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.bg-video__content {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.header {
+  position: relative;
+  height: 55rem;
+  width: 100%;
+  z-index: -4;
+}
+.header__nav {
+  background-color: lightcoral;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  height: 10rem;
+  width: 80%;
+}
+.header__logo {
+  font-size: 3em;
+  color: #fff;
+  margin-top: 6rem;
+}
+.header__btn {
+  background-color: #56CCCE;
+  color: #fff;
+  margin-top: 5rem;
+  font-size: 1.9em;
+  text-decoration: none;
+  height: 5rem;
+  width: 15%;
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.header__text {
+  color: #fff;
+  position: absolute;
+  height: 20rem;
+  width: 50%;
+  top: 50%;
+  left: 10%;
+  font-size: 6em;
+  z-index: 1000;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,7 +1,7 @@
 {
   "name": "easybike-app",
   "version": "1.0.0",
-  "description": "EasyBike-App",
+  "description": "EasyBike App",
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development",
@@ -23,14 +23,16 @@
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "css-loader": "^4.2.1",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "image-webpack-loader": "^6.0.0",
+    "imagemin": "^7.0.1",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
-  },
-  "dependencies": {
-    "babel-polyfill": "^6.26.0"
   }
 }

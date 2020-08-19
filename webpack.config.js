@@ -1,22 +1,28 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-	entry: ['babel-polyfill', './src/js/index.js'],
+	entry:  './src/js/index.js',
 	output: {
-		path: path.resolve(__dirname, 'dist/js'),
-		filename: 'bundle.js'
-    },
-    devServer : {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'js/bundle.js'
+	},
+	devServer : {
 		contentBase: './dist'
-    },
-    plugins: [
+	},
+	plugins: [
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: './src/index.html'
-		})
-    ],
-    module: {
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+              { from: './src/img', to: 'img' }
+            ],
+          })
+	],
+	module: {
 		rules: [
 			{
 				test: /\.m?js$/,
@@ -27,7 +33,28 @@ module.exports = {
 						presets: ['@babel/preset-env']
 					}
 				}
-			}
+			},
+			{
+				test: /\.sc|ass$/,
+				use: [
+					{ loader: 'css-loader' },          
+					{ loader: 'sass-loader' }
+				]
+	  		},
+			{
+				test: /\.(eot|ttf|woff|woff2)$/,
+				loader: 'file-loader',
+				options: {
+		  			name: 'fonts/[name].[hash].[ext]'
+				}
+	  		},
+			{
+	   			test: /\.(gif|png|jpe?g|svg)$/i,
+	   			use: [
+					'file-loader',
+					{ loader: 'image-webpack-loader' },
+	   			]
+	  		}
 		]
 	}
 };
