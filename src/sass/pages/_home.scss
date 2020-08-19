@@ -1,2 +1,29 @@
-// SECTIONS
+body {
+    font-family: $poppins;
+    box-sizing: border-box;
+}
+
+*, 
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+
+    @include respond(tab-land) {
+        font-size: 56.25%;
+    }
+
+    @include respond(tab-port) {
+        font-size: 50%;
+    }
+
+    @include respond(desktop) {
+        font-size: 75%;
+    }
+}
 
