@@ -1,0 +1,21 @@
+.concept {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 85%;
+    height: 24rem;
+    
+    &__title {
+        color: $title-color;
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    &__paragraph {
+        color: $paragraph-color;
+        font-weight: 400;
+        font-size: 1.2rem;
+        line-height: 2.4rem;
+    }
+
+}

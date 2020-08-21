@@ -1,0 +1,25 @@
+.carrousel {
+    position: relative;
+    display: block;
+    height: 30rem;
+    width: 85%;
+    border-radius: 5rem;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        height: 7rem;
+        width: 100%;
+        background-image: linear-gradient(to top, rgba(0, 0, 0, .7) 30%, transparent 70%);
+        
+    }
+
+    &__content {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
