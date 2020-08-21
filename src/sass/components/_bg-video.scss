@@ -6,10 +6,23 @@
     width: 100%;
     z-index: -1;
     opacity: .9;
+    overflow: hidden;
 
     &__content {
         height: 100%;
         width: 100%;
         object-fit: cover;
+
+        @media (min-width: $breakpoint-medium) {
+            height: 120%;
+        }
+
+        @media (min-width: $breakpoint-large) {
+            height: 120%;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
+            height: 120%;
+        }
     }
 }
