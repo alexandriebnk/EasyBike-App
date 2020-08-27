@@ -1,0 +1,45 @@
+.carrousel__buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 82%;
+    bottom: 7%;    
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media (min-width: $breakpoint-medium) {
+        bottom: 5%;
+    }
+
+    &-arrows {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 17%;
+    }
+
+    &-left,
+    &-right {
+    
+        @media (min-width: $breakpoint-medium) {
+            width: 3rem;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
+            width: 2rem;
+        }
+    }
+
+    &-pause {
+    
+        @media (min-width: $breakpoint-medium) {
+            width: 4.3rem;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
+            width: 3rem;
+        }
+    }
+}

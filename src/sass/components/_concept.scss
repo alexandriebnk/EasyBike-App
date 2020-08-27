@@ -3,12 +3,27 @@
     flex-direction: column;
     justify-content: space-between;
     width: 85%;
-    height: 24rem;
-    
+    margin-bottom: 3rem;
+
+    @media (min-width: $breakpoint-xlarge) {
+        width: 45%; 
+    }
+
     &__title {
         color: $title-color;
-        font-size: 2.5rem;
+        //font-size: 2.6rem;
+        font-size: 200rem;
         font-weight: 700;
+        margin-bottom: 2rem;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+        @media (min-width: $breakpoint-medium) {
+            font-size: 5.3rem;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
+            font-size: 4rem;
+        }
     }
 
     &__paragraph {
@@ -16,6 +31,19 @@
         font-weight: 400;
         font-size: 1.2rem;
         line-height: 2.4rem;
-    }
 
+        @media (min-width: $breakpoint-medium) {
+            font-size: 2.6rem;
+            line-height: 4.7rem;
+        }
+
+        @media (min-width: $breakpoint-large) {
+            font-size: 2.3rem;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
+            font-size: 1.5rem;
+            line-height: 3rem;
+        }
+    }
 }

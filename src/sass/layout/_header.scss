@@ -11,17 +11,14 @@
         top: 2%;
         left: 50%;
         transform: translateX(-50%);
-        height: 8rem;
         width: 85%;
     
         @media (min-width: $breakpoint-medium) {
-            height: 10rem;
             width: 80%;
             top: 0%;
         }
 
         @media (min-width: $breakpoint-xlarge) {
-            height: 10rem;
             width: 80%;
             top: 0%;
         }
@@ -109,7 +106,6 @@
         }
 
         @media (min-width: $breakpoint-xlarge) {
-            height: 20rem;
             width: 60%;
             top: 40%;
             left: 10%;
