@@ -1,0 +1,17 @@
+.newsletter {
+    width: 90%;
+
+    &__title {
+        color: $title-color;
+        font-size: 2.5rem;
+        margin-top: 8rem;
+        margin-bottom: 1rem;
+    }
+
+    &__paragraph {
+        color: $paragraph-color;
+        font-size: 1.4rem;
+        line-height: 2.5rem;
+    }
+    
+}
