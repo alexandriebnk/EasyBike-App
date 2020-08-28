@@ -58,5 +58,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (min-width: $breakpoint-xlarge) {
+        margin-top: 10rem;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 10rem;
+        padding-right: 10rem;
+    }
 }
 
