@@ -1,0 +1,25 @@
+.footer {
+    background-color: $title-color;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 5rem;
+
+    @media (min-width: $breakpoint-large) {
+        padding-top: 8rem;
+        padding-left: 8rem;
+    }
+
+    &__logo {
+        margin-bottom: 20rem;
+
+        @media (min-width: $breakpoint-large) {
+            margin-bottom: 10rem;
+        }
+    }
+
+    &__copyright {
+        color: $logo-color;
+        font-size: 1.5rem;
+    }
+
+}

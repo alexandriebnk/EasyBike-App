@@ -29,4 +29,8 @@
         width: 15%;
         margin-top: 5rem;
     }
+
+    &:focus {
+        outline: none;
+    }
 }

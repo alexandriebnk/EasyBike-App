@@ -25,20 +25,10 @@
     }
     
     &__logo {
-        font-weight: 700;
-        font-size: 2rem;
         margin-top: 4rem;
-        letter-spacing: .1rem;
-        color: $logo-color;
         
         @media (min-width: $breakpoint-medium) {
             margin-top: 6rem;
-            font-size: 3rem;
-        }
-
-        @media (min-width: $breakpoint-xlarge) {
-            margin-top: 6rem;
-            font-size: 3rem;
         }
     }
 
