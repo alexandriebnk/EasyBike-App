@@ -1,0 +1,32 @@
+.reservation-button {
+    background-color: $color-primary; 
+    color: $logo-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.9rem;
+    width: 35%;
+    font-size: 1.3rem;
+    text-decoration: none;
+    border-radius: 5rem;
+    cursor: pointer;
+    letter-spacing: .08rem;
+    margin-top: 3.5rem;
+
+    @media (min-width: $breakpoint-medium) {
+        height: 5rem;
+        width: 25%;
+        font-size: 1.6rem;
+        margin-top: 5.5rem;
+    }
+
+    @media (min-width: $breakpoint-large) {
+        width: 20%;
+    }
+
+    @media (min-width: $breakpoint-xlarge) {
+        height: 5rem;
+        width: 15%;
+        margin-top: 5rem;
+    }
+}

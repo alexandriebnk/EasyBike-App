@@ -42,45 +42,6 @@
         }
     }
 
-    &__btn {
-        display: flex;
-        background-color: $color-primary; 
-        margin-top: 3.5rem;
-        height: 3.9rem;
-        width: 35%;
-        align-items: center;
-        justify-content: center;
-        border-radius: 5rem;
-        cursor: pointer;
-        letter-spacing: .08rem;
-
-        @media (min-width: $breakpoint-medium) {
-            margin-top: 5.5rem;
-            height: 5rem;
-            width: 25%;
-        }
-
-        @media (min-width: $breakpoint-large) {
-            width: 20%;
-        }
-
-        @media (min-width: $breakpoint-xlarge) {
-            margin-top: 5rem;
-            height: 5rem;
-            width: 15%;
-        }
-
-        &--link {
-            color: $logo-color;
-            font-size: 1.3rem;
-            text-decoration: none;
-
-            @media (min-width: $breakpoint-medium) {
-                font-size: 1.6rem;
-            }
-        }
-    }
-
     &__text {
         color: $logo-color;
         position: absolute;

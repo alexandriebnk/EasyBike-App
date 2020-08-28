@@ -1,0 +1,12 @@
+.form {
+    background-color: plum;
+    margin-top: 3rem;
+    
+
+    &__name,
+    &__surname {
+        outline: none;
+        //border-bottom: .1rem solid $color-primary;
+
+    }
+}

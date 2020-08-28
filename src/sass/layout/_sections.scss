@@ -7,7 +7,7 @@
     margin-top: 6rem;
 
     @media (min-width: $breakpoint-medium) {
-        margin-top: 15rem;
+        margin-top: 10rem;
     }
 
     @media (min-width: $breakpoint-large) {
@@ -22,3 +22,28 @@
         margin-top: 12rem;
     }
 }
+
+.section-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-top: 6rem;
+
+    @media (min-width: $breakpoint-xlarge) {
+        flex-direction: row;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: unset;
+        margin-top: 13rem;
+    }
+}
+
+.section-reservation {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+

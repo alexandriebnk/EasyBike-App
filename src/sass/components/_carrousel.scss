@@ -2,10 +2,20 @@
     position: relative;
     display: block;
     width: 85%;
+    height: 30rem;
     border-radius: 5rem;
     overflow: hidden;
 
+    @media (min-width: $breakpoint-medium) {
+        height: 40rem;
+    }
+
+    @media (min-width: $breakpoint-large) {
+        height: 50rem;
+    }
+
     @media (min-width: $breakpoint-xlarge) {
+        height: 40rem;
         width: 45%;
     }
 
@@ -24,8 +34,8 @@
     }
 
     &__content {
-        //height: 100%;
+        height: 100%;
         width: 100%;
-        //object-fit: cover;
+        object-fit: cover;
     }
 }
