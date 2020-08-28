@@ -2,4 +2,11 @@
     background-color: skyblue;
     height: 50rem;
     width: 100%;
+
+    @media (min-width: $breakpoint-xlarge) {
+        height: 65rem;
+        width: 55%;
+        border-top-left-radius: 5%;
+        border-bottom-left-radius: 5%;
+    }
 }
