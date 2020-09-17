@@ -22,6 +22,7 @@
 
     &-left,
     &-right {
+        cursor: pointer;
     
         @media (min-width: $breakpoint-medium) {
             width: 3rem;
@@ -33,6 +34,7 @@
     }
 
     &-pause {
+        cursor: pointer;
     
         @media (min-width: $breakpoint-medium) {
             width: 4.3rem;

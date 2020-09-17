@@ -7,6 +7,9 @@
         <meta name="description" content="Application de réservation de vélo">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
         <title>EasyBike</title>
     </head>
     <body>
@@ -35,13 +38,13 @@
                     eu fugiat nulla pariatur</p>
             </div>
             <div class='carrousel'>
-                <img src="img/img-carrousel-1.png" class="carrousel__content" alt="bike">
+                <img src="#" class="carrousel__content" id="js-carrousel__content" alt="bike">
                 <div class="carrousel__buttons">
                     <div class="carrousel__buttons-arrows">
-                        <img src="img/svg/left-arrow-carrousel.svg" class="carrousel__buttons-left" alt="left-arrow">
-                        <img src="img/svg/right-arrow-carrousel.svg" class="carrousel__buttons-right" alt="right-arrow">
+                        <img src="img/svg/left-arrow-carrousel.svg" class="carrousel__buttons-left" id="js-carrousel__buttons-left" alt="left-arrow">
+                        <img src="img/svg/right-arrow-carrousel.svg" class="carrousel__buttons-right" id="js-carrousel__buttons-right" alt="right-arrow">
                     </div>
-                    <img src="img/svg/pause-carrousel.svg" class="carrousel__buttons-pause" alt="pause">
+                    <img src="img/svg/pause-carrousel.svg" class="carrousel__buttons-pause" id="js-carrousel__buttons-pause" alt="pause">
                 </div>
             </div>
         </section>
@@ -78,9 +81,9 @@
                 <h3 class="reservation__title">Réservation</h3>
                 <div class="reservation__illustrations">
                     <img src="img/svg/bike-image.svg" class="reservation__illustrations-image">
-                    <div class="reservation__illustrations-number">20</div>
+                    <div class="reservation__illustrations-number" id="js-reservation__illustrations-number">20</div>
                 </div>
-                <div class="reservation__address">12 rue Mansart, 75009 Paris</div>
+                <div class="reservation__address" id="js-reservation__address">12 rue Mansart, 75009 Paris</div>
                 <form action="#" method="get" class="form">
                     <div class="form__surname">
                         <label for="surname"></label>
@@ -90,11 +93,11 @@
                         <label for="name"></label>
                         <input type="text" name="name" id="name" class="form__name-input" placeholder="Prénom" required>
                     </div>
-                    <input class="reservation-button form__submit" type="submit" value="Réserver">
+                    <input class="reservation-button form__submit" id="js-form__submit" type="submit" value="Réserver">
                 </form>
             </div>
 
-            <div class="map"></div>
+            <div class="map" id="js-map"></div>
         </section>
 
         <section class="section-newsletter">
@@ -116,4 +119,10 @@
             <p class="footer__logo logo">easybike</p>
             <p class="footer__copyright">©2020 Easybike</p>
         </footer>
+
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+        
     </body>
+</html>
