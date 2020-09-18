@@ -1,5 +1,5 @@
 import '../sass/main.scss';
-import Carrousel from './carrousel';
+import Carrousel from './carrousel'
 import Reservation from './reservation';
 
 new Carrousel();
