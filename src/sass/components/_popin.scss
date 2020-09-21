@@ -1,0 +1,58 @@
+.popin {
+    background-color: $logo-color;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 5rem;
+    border-top-right-radius: 5rem;
+
+    &__text {
+        width: 90%;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        text-align: center;
+
+        &-title {
+            color: $title-color;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        &-paragraph {
+            color: $paragraph-color;
+            font-weight: 400;
+            font-size: 1.3rem;
+            line-height: 2.5rem;
+        }
+    }
+}
+
+#popin {
+    display: none;
+}
+
+#canvas {
+    background: $canvas;
+    border-radius: 4rem;
+}
+
+.validation {
+    background-color: $placeholder-color;
+    color: $logo-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.9rem;
+    width: 35%;
+    font-size: 1.3rem;
+    text-decoration: none;
+    border-radius: 5rem;
+    cursor: pointer;
+    letter-spacing: .08rem;
+    border: none;
+    margin-top: 3rem;
+    margin-bottom: 3rem
+}

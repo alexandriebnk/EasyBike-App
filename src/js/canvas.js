@@ -6,7 +6,7 @@ class ObjetCanvas {
     constructor() { 
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext("2d");
-        this.btnOK = document.querySelector(".btn-ok");
+        this.validation = document.getElementById('validation');
         this.signer = false;
         this.positionSouris = {x: 0, y: 0};
         this.dernierePosition = this.positionSouris;
@@ -21,7 +21,7 @@ class ObjetCanvas {
         this.canvas.addEventListener("mousedown", (e) => {
             this.signer = true;
             this.dernierePosition = this.recupPositionSouris(e);
-            this.btnOK.style.display = "block";
+            this.validation.style.display = "block";
         })
     
         // Dès que le User bouge la souris en étant toujours en mousedown

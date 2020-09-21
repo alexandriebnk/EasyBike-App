@@ -85,6 +85,17 @@
         </section>
 
         <section class="section-reservation">
+
+            <div class="popin" id="popin">
+                <div class="popin__text">
+                    <p class="popin__text-title">Confirmation</p>
+                    <p class="popin__text-paragraph">Pour réserver dès maintenant votre vélo, et pour des raisons de sécurité,
+                        votre signature est requise !</p>
+                </div>
+                <canvas id="canvas">"Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour"</canvas>
+                <button class="validation" id="validation">Valider</button>
+            </div>
+
             <div name="reservation-anchor" id="reservation-anchor" class="reservation">
                 <h3 class="reservation__title">Réservation</h3>
                 <div class="reservation__illustrations">
@@ -94,12 +105,12 @@
                 <div class="reservation__address" id="js-reservation__address">12 rue Mansart, 75009 Paris</div>
                 <form action="#" method="get" class="form">
                     <div class="form__surname">
-                        <label for="surname"></label>
-                        <input type="text" name="surname" id="surname" class="form__surname-input" placeholder="Nom" required>
+                        <label for="form__surname-input"></label>
+                        <input type="text" name="surname" id="form__surname-input" placeholder="Nom" required>
                     </div>
                     <div class="form__name">
-                        <label for="name"></label>
-                        <input type="text" name="name" id="name" class="form__name-input" placeholder="Prénom" required>
+                        <label for="form__name-input"></label>
+                        <input type="text" name="name" id="form__name-input" placeholder="Prénom" required>
                     </div>
                     <input class="reservation-button form__submit" id="js-form__submit" type="submit" value="Réserver">
                 </form>

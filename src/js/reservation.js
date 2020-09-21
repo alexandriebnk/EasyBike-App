@@ -11,16 +11,16 @@ class Reservation {
         this.map = document.getElementById("js-map");
         this.address = document.getElementById("js-reservation__address");
         this.bikesNumber = document.getElementById("js-reservation__illustrations-number");
-        this.inputNom = document.getElementById("surname");
-        this.inputPrenom = document.getElementById("name");
+        this.inputSurname = document.getElementById("form__surname-input");
+        this.inputName = document.getElementById("form__name-input");
         this.btnReserver = document.getElementById("js-form__submit");
         // Datas
         this.valeurAdresse = null;
         this.minutes = 19;
         this.secondes = 59;
         // Canvas
-        this.zonePopup = document.querySelector(".popup");
-        this.boutonOK = document.querySelector(".btn-ok");
+        this.popIn = document.getElementById('popin');
+        this.validation = document.getElementById('validation');
         // Reservation
         this.divResa = document.querySelector(".reservation");
         this.lAdresse = document.querySelector(".l-adresse");
@@ -34,12 +34,12 @@ class Reservation {
         this.maMap = new Map(); 
 
         // Events pour récupérer NOM et PRENOM tapés par USER + localStorage
-        this.inputNom.addEventListener("change", (e) => {
-            localStorage.setItem("nomUser", this.inputNom.value);
+        this.inputSurname.addEventListener("change", (e) => {
+            localStorage.setItem("nomUser", this.inputSurname.value);
         })
 
-        this.inputPrenom.addEventListener("change", (e) => {
-            localStorage.setItem("prenomUser", this.inputPrenom.value);
+        this.inputName.addEventListener("change", (e) => {
+            localStorage.setItem("prenomUser", this.inputName.value);
         })
 
         // Afficher NOM et PRENOM en placeholder de dernière résa sur page si refresh
@@ -66,16 +66,16 @@ class Reservation {
         })
             
         // Evenement au clic du boutonOK du CANVAS
-        this.boutonOK.addEventListener("click", (e) => {
+        this.validation.addEventListener("click", (e) => {
             // Eviter refresh quand click
             e.preventDefault();
             // Faire disparaitre le CANVAS
-            this.zonePopup.style.display = "none";
+            this.popIn.style.display = "none";
             // Retirer NOM et PRENOM des input quand affichage resa (esthétique)
-            this.inputNom.value = null; 
-            this.inputPrenom.value = null; 
-            this.inputNom.removeAttribute("placeholder", localStorage.getItem("nomUser"));
-            this.inputPrenom.removeAttribute("placeholder", localStorage.getItem("prenomUser"));
+            this.inputSurname.value = null; 
+            this.inputName.value = null; 
+            this.inputSurname.removeAttribute("placeholder", localStorage.getItem("nomUser"));
+            this.inputName.removeAttribute("placeholder", localStorage.getItem("prenomUser"));
             // Afficher RESERVATION 
             this.divResa.style.display = "block";
             // Démarrer le compteur
@@ -105,23 +105,25 @@ class Reservation {
     afficherCanvas = () => {
         let regex = /^[A-Za-zàäâéèëêïîôùüÿçœ\'-]+$/;
 
-        if (!regex.test(this.inputNom.value) && this.inputNom.value.length >= 2) {
-            this.inputNom.style.border = "2px solid #d88493";
-        } else if (!regex.test(this.inputPrenom.value) && this.inputPrenom.value.length >= 2) {
-            this.inputPrenom.style.border = "2px solid #d88493";
-        } else if (this.inputNom.value.length >= 2 && this.inputPrenom.value.length <= 1) {
-            this.inputPrenom.style.border = "2px solid #d88493";
-            this.inputNom.style.border = "none";
-        } else if (this.inputPrenom.value.length >= 2 && this.inputNom.value.length <= 1) {
-            this.inputNom.style.border = "2px solid #d88493";
-            this.inputPrenom.style.border = "none";
-        } else if (this.inputNom.value.length <= 1 && this.inputPrenom.value.length <= 1){
-            this.inputNom.style.border = "2px solid #d88493";
-            this.inputPrenom.style.border = "2px solid #d88493";
+        if (!regex.test(this.inputSurname.value) && this.inputSurname.value.length >= 2) {
+            this.inputSurname.style.borderBottom = '1px solid #F20746';
+            this.inputSurname.value.color = '#F20746';
+            console.log(this.inputSurname.value);
+        } else if (!regex.test(this.inputName.value) && this.inputName.value.length >= 2) {
+            this.inputName.style.border = "2px solid #d88493";
+        } else if (this.inputSurname.value.length >= 2 && this.inputName.value.length <= 1) {
+            this.inputName.style.border = "2px solid #d88493";
+            this.inputSurname.style.border = "none";
+        } else if (this.inputName.value.length >= 2 && this.inputSurname.value.length <= 1) {
+            this.inputSurname.style.border = "2px solid #d88493";
+            this.inputName.style.border = "none";
+        } else if (this.inputSurname.value.length <= 1 && this.inputName.value.length <= 1){
+            this.inputSurname.style.border = "2px solid #d88493";
+            this.inputName.style.border = "2px solid #d88493";
         } else {
-            this.inputNom.style.border = "none";
-            this.inputPrenom.style.border = "none";
-            this.zonePopup.style.display = "block";
+            this.inputSurname.style.border = "none";
+            this.inputName.style.border = "none";
+            this.popIn.style.display = "flex";
             let leCanvas = new ObjetCanvas();
             // Désactiver la possibilité de reserver par dessus
             this.desactiverFonctionsResa();
@@ -197,8 +199,8 @@ class Reservation {
     // Méthode pour recup dernier NOM et PRENOM en suggestion (placeholder) si refresh
     recupNomPrenom = () => {
         if (localStorage.getItem("nomUser") && localStorage.getItem("prenomUser")) {
-            this.inputNom.setAttribute("placeholder", localStorage.getItem("nomUser"));
-            this.inputPrenom.setAttribute("placeholder", localStorage.getItem("prenomUser"));
+            this.inputSurname.setAttribute("placeholder", localStorage.getItem("nomUser"));
+            this.inputName.setAttribute("placeholder", localStorage.getItem("prenomUser"));
         }
     }
 
@@ -236,8 +238,8 @@ class Reservation {
     // Méthode pour éviter une nouvelle réservation
     desactiverFonctionsResa = () => {
         this.btnReserver.disabled = true;
-        this.inputNom.disabled = true;
-        this.inputPrenom.disabled = true;
+        this.inputSurname.disabled = true;
+        this.inputName.disabled = true;
         this.address.style.display = "none";
         this.inputPlaces.style.display = "none";
         this.bikesNumber.style.display = "none";

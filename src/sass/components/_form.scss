@@ -1,39 +1,5 @@
 .form {
-    margin-top: 4rem;
-    
-    &__name-input,
-    &__surname-input {
-        height: 5rem;
-        width: 100%;
-        margin-top: 1rem;
-        border: none;
-        border-bottom: 1px solid $placeholder-color;
-
-        @media (min-width: $breakpoint-medium) {
-            height: 8rem;
-        }
-
-        @media (min-width: $breakpoint-xlarge) {
-            height: 4rem;
-        }
-
-        &::placeholder {
-            color: $placeholder-color;
-            font-size: 1.5rem;
-
-            @media (min-width: $breakpoint-medium) {
-                font-size: 2.5rem;
-            }
-
-            @media (min-width: $breakpoint-xlarge) {
-                font-size: 1.5rem;
-            }
-        }
-
-        &:focus {
-           outline: none;
-        }
-    }
+    margin-top: 4rem;      
 
     &__submit {
         margin-top: 4rem;
@@ -50,6 +16,40 @@
             font-size: 1.6rem;
             width: 35%;
         }
+    }
+}
+
+#form__surname-input,
+#form__name-input {
+    height: 5rem;
+    width: 100%;
+    margin-top: 1rem;
+    border: none;
+    border-bottom: 1px solid $placeholder-color;
+
+    @media (min-width: $breakpoint-medium) {
+        height: 8rem;
+    }
+
+    @media (min-width: $breakpoint-xlarge) {
+        height: 4rem;
+    }
+
+    &::placeholder {
+        color: $placeholder-color;
+        font-size: 1.5rem;
+
+        @media (min-width: $breakpoint-medium) {
+            font-size: 2.5rem;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &:focus {
+       outline: none;
     }
 }
 
