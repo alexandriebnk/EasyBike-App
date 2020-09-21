@@ -9,8 +9,8 @@ class Reservation {
     constructor() {
         // UI 
         this.map = document.getElementById("js-map");
-        this.inputAdresse = document.getElementById("js-reservation__address");
-        this.inputVelos = document.getElementById("js-reservation__illustrations-number");
+        this.address = document.getElementById("js-reservation__address");
+        this.bikesNumber = document.getElementById("js-reservation__illustrations-number");
         this.inputNom = document.getElementById("surname");
         this.inputPrenom = document.getElementById("name");
         this.btnReserver = document.getElementById("js-form__submit");
@@ -189,7 +189,7 @@ class Reservation {
         // Garder les dernières données NOM / PRENOM en placeholder 
         this.recupNomPrenom();
         // Supprimer les données récupérées de la dernière resa
-        sessionStorage.removeItem("lAdresse");
+        sessionStorage.removeItem("address");
         sessionStorage.removeItem("tps-minutes");
         sessionStorage.removeItem("tps-secondes");
     }
@@ -206,7 +206,7 @@ class Reservation {
     recupResa = () => {
         if (localStorage.getItem("nomUser") 
             && localStorage.getItem("prenomUser")
-            && sessionStorage.getItem("lAdresse")
+            && sessionStorage.getItem("address")
             && sessionStorage.getItem("tps-minutes")
             && sessionStorage.getItem("tps-secondes")) {
 
@@ -238,9 +238,9 @@ class Reservation {
         this.btnReserver.disabled = true;
         this.inputNom.disabled = true;
         this.inputPrenom.disabled = true;
-        this.inputAdresse.style.display = "none";
+        this.address.style.display = "none";
         this.inputPlaces.style.display = "none";
-        this.inputVelos.style.display = "none";
+        this.bikesNumber.style.display = "none";
     }
 }
 

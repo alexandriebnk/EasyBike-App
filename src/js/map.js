@@ -7,8 +7,8 @@ class Map {
         this.api = "https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=6dd524dd35fde93005f7e4806b82374aedc7864f";
         this.mapContainer = document.getElementById("js-map");
         this.map = null;
-        this.adresse = document.getElementById("js-reservation__address");
-        this.velos = document.getElementById("js-reservation__illustrations-number");
+        this.address = document.getElementById("js-reservation__address");
+        this.bikesNumber = document.getElementById("js-reservation__illustrations-number");
         this.currentStation = null;
 
         // Initialiser la map
@@ -65,11 +65,11 @@ class Map {
                 this.currentStation = station;
                 if (station.available_bikes > 0) {
                     // Afficher les datas de la station
-                    this.adresse.innerHTML = station.address.toLowerCase();
-                    this.velos.innerHTML = station.available_bikes;
+                    this.address.innerHTML = (station.address.charAt(0).toUpperCase() + station.address.substring(1).toLowerCase());
+                    this.bikesNumber.innerHTML = station.available_bikes;
                 } else {
-                    this.adresse.innerHTML = station.address.toLowerCase();
-                    this.velos.innerHTML = "0";
+                    this.address.innerHTML = station.address.toLowerCase();
+                    this.bikesNumber.innerHTML = "0";
                 }
             })
         })

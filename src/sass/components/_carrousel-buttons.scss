@@ -8,6 +8,7 @@
     bottom: 7%;    
     left: 50%;
     transform: translateX(-50%);
+    z-index: 20;
 
     @media (min-width: $breakpoint-medium) {
         bottom: 5%;
@@ -23,6 +24,12 @@
     &-left,
     &-right {
         cursor: pointer;
+        transition: all 0.2s ease;
+        
+
+        &:hover {
+            transform: scale(1.1);
+        }
     
         @media (min-width: $breakpoint-medium) {
             width: 3rem;
@@ -34,7 +41,31 @@
     }
 
     &-pause {
+        display: block;
         cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    
+        @media (min-width: $breakpoint-medium) {
+            width: 4.3rem;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
+            width: 3rem;
+        }
+    }
+
+    &-play {
+        display: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     
         @media (min-width: $breakpoint-medium) {
             width: 4.3rem;

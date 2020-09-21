@@ -4,7 +4,7 @@
     width: 85%;
     height: 30rem;
     border-radius: 5rem;
-    overflow: hidden;
+    overflow: hidden; 
 
     @media (min-width: $breakpoint-medium) {
         height: 40rem;
@@ -26,6 +26,7 @@
         bottom: 0;
         height: 7rem;
         width: 100%;
+        z-index: 10;
         background-image: linear-gradient(to top, rgba(0, 0, 0, .7) 30%, transparent 70%);
 
         @media (min-width: $breakpoint-medium) {
