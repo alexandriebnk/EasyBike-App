@@ -32,7 +32,6 @@ class Map {
             maxZoom: 17,
             attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
         })
-        
         this.map.addLayer(osmLayer);
     }
     
@@ -63,13 +62,19 @@ class Map {
             marker.addEventListener("click", () => {
                 // Stocker ces datas dans le constructor 
                 this.currentStation = station;
-                if (station.available_bikes > 0) {
-                    // Afficher les datas de la station
+                // Afficher les datas de la station
+                if (station.address != '') {
                     this.address.innerHTML = (station.address.charAt(0).toUpperCase() + station.address.substring(1).toLowerCase());
-                    this.bikesNumber.innerHTML = station.available_bikes;
                 } else {
-                    this.address.innerHTML = station.address.toLowerCase();
-                    this.bikesNumber.innerHTML = "0";
+                    this.address.innerHTML = 'Adresse non reconnue';
+                }
+                this.bikesNumber.innerHTML = station.available_bikes;
+                if (station.available_bikes > 0) {
+                    this.address.style.color = '#20284F';
+                    this.bikesNumber.style.color = '#20284F';
+                } else {
+                    this.address.style.color = '#8D8D8D';
+                    this.bikesNumber.style.color = '#F20746';
                 }
             })
         })

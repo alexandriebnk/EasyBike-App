@@ -15,6 +15,8 @@ class Reservation {
         this.inputName = document.getElementById("form__name-input");
         this.reservationButton = document.getElementById("js-form__submit");
         // Datas
+        this.test1 = null;
+        this.test2 = null;
         this.correctSurname = null;
         this.correctName = null;
         //this.valeurAdresse = null;
@@ -36,10 +38,18 @@ class Reservation {
         // Instance de la classe MAP
         this.maMap = new Map(); 
 
+        // Ne pas permettre de réservation sans infos
         this.reservationButton.disabled = true;
 
-        this.inputName.addEventListener('keydown', (e) => {
-            if (!this.regex.test(this.inputName.value) || this.inputName.value.length <= 1) {
+        this.checkSelectedStation();
+            
+
+        // Event pour remplir le prénom
+        this.inputName.addEventListener('input', () => {
+            // Test regEx pour valider l'info
+            if (this.inputName.value.length == 0) {
+                this.inputName.style.borderBottom = '1px solid #CACACA';
+            } else if(!this.regex.test(this.inputName.value) || this.inputName.value.length <= 1) {
                 this.inputName.style.borderBottom = '1px solid #F20746';
                 this.inputName.style.color = '#F20746';
                 this.correctName = false;
@@ -51,10 +61,14 @@ class Reservation {
                 localStorage.setItem("prenomUser", this.inputName.value);
             }
             this.checkUserInfos();
+            this.activateButtonReservation();
         }) 
         
-        this.inputSurname.addEventListener('keydown', (e) => {
-            if (!this.regex.test(this.inputSurname.value) || this.inputSurname.value.length <= 1) {
+        // Event pour remplir le nom
+        this.inputSurname.addEventListener('input', () => {
+            if (this.inputSurname.value.length == 0) {
+                this.inputSurname.style.borderBottom = '1px solid #CACACA';
+            } else if (!this.regex.test(this.inputSurname.value) || this.inputSurname.value.length <= 1) {
                 this.inputSurname.style.borderBottom = '1px solid #F20746';
                 this.inputSurname.style.color = '#F20746';
                 this.correctSurname = false;
@@ -65,6 +79,7 @@ class Reservation {
                 localStorage.setItem("nomUser", this.inputSurname.value);
             }
             this.checkUserInfos();
+            this.activateButtonReservation();
         }) 
     
 
@@ -75,7 +90,7 @@ class Reservation {
         //this.recupResa();
 
         // Evenement au clic du btnReserver 
-        this.reservationButton.addEventListener("click", (e) => {
+        this.reservationButton.addEventListener('click', (e) => {
             // Eviter refresh quand click
             e.preventDefault();     
             // Afficher CANVAS si :
@@ -85,7 +100,10 @@ class Reservation {
                 if (this.maMap.currentStation.available_bikes) {
                     this.afficherCanvas(); 
                 }
-            }  
+            } else {
+                this.address.innerHTML = 'Choisissez une station !';
+                this.address.style.color = 'rgba(242, 7, 70, 0.65)';
+            }
         })
             
        /* // Evenement au clic du boutonOK du CANVAS
@@ -124,15 +142,34 @@ class Reservation {
         })*/   
     }
 
-    checkUserInfos = () => {
-        if (this.correctName == true && this.correctSurname == true) {
+    activateButtonReservation = () => {
+        if (this.test1 == true && this.test2 == true) {
+            console.log('ok');
             this.reservationButton.style.backgroundColor = '#56CCCE';
             this.reservationButton.disabled = false;
-            console.log('cest ok');
-        } else {
-            this.reservationButton.disabled = true;
-            console.log('cest pas ok');
         }
+    }
+
+    checkSelectedStation = () => {
+         this.map.addEventListener('click', () => {
+            if (this.maMap.currentStation) {
+                if (this.maMap.currentStation.available_bikes) {
+                    this.test2 = true;
+                }
+            }
+         })
+    }
+
+    // Méthode pour validité info et activation bouton 'reserver'
+    checkUserInfos = () => {
+        if (this.correctName == true && this.correctSurname == true) {
+            this.test1 = true;
+            /*this.reservationButton.style.backgroundColor = '#56CCCE';
+            this.reservationButton.disabled = false;
+        } else {
+            this.reservationButton.style.backgroundColor = '#CACACA';
+            this.reservationButton.disabled = true;*/
+        } 
     }
 
     // Méthode pour afficher Canvas + regEx pour controler syntaxe champ
