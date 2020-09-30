@@ -1,0 +1,88 @@
+.booking {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2.7rem;
+
+
+    &__state {
+        display: flex;
+        flex-direction: column;
+        width: 73%;
+        margin-top: .4rem;
+
+        &-inProgress {
+            color: $logo-color;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: .1rem;
+        }
+    
+        &-userInfos {
+            display: flex;
+            flex-direction: column;
+            margin-top: 1.6rem;
+        }
+    }
+
+    &__countdown {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 27%;
+
+
+        &-icon {
+            margin-right: 1rem;
+            margin-top: .2rem;
+        }
+
+        &-running {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+
+#userInfos {
+
+    &__id,
+    &__address {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+    }
+
+    &__icon {
+        width: 1.7rem;
+    }
+
+    &__registered {
+        display: flex;
+        flex-direction: row;
+
+        &-address,
+        &-userName,
+        &-userSurname {
+            color: $logo-color;
+            font-size: 1.1rem;
+            margin-left: .7rem;
+            margin-top: .3rem;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+#minutes-paragraph,
+#separation-pts, 
+#secondes-paragraph {
+    color: $logo-color;
+    font-size: 2rem;
+}
+
+#separation-pts {
+    margin-left: .2rem;
+    margin-right: .2rem;
+}

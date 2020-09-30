@@ -15,285 +15,244 @@ class Reservation {
         this.inputName = document.getElementById("form__name-input");
         this.reservationButton = document.getElementById("js-form__submit");
         // Datas
-        this.test1 = null;
-        this.test2 = null;
         this.correctSurname = null;
         this.correctName = null;
-        //this.valeurAdresse = null;
+        this.bikeAvailable = null;
         this.regex = /^[A-Za-zàäâéèëêïîôùüÿçœ\'-]+$/;
-        //this.minutes = 19;
-        //this.secondes = 59;
+        this.minutes = 19;
+        this.secondes = 59;
+        this.addressValue = null;
         // Canvas
         this.popIn = document.getElementById('popin');
-        this.validation = document.getElementById('validation');
-        /*// Reservation
-        this.divResa = document.querySelector(".reservation");
-        this.lAdresse = document.querySelector(".l-adresse");
-        this.leNom = document.querySelector(".le-nom");
-        this.lePrenom = document.querySelector(".le-prenom");
-        this.tpsMinutes = document.querySelector(".tps-minutes");
-        this.tpsSecondes = document.querySelector(".tps-secondes");
-        this.boutonAnnuler = document.querySelector(".btn-annuler");*/
+        this.overlay = document.getElementById('overlay');
+        this.validationButtonPopin = document.getElementById('popin__validation');
+        // Reservation
+        this.bookingArea = document.getElementById('section-booking');
+        this.minutesParagraph = document.getElementById("minutes-paragraph");
+        this.secondesParagraph = document.getElementById("secondes-paragraph");
+        this.registeredAddress = document.getElementById("userInfos__registered-address");
+        this.userName = document.getElementById('userInfos__registered-userName');
+        this.userSurname = document.getElementById('userInfos__registered-userSurname');
+        this.annulationButton = document.getElementById("annulation__button");
 
         // Instance de la classe MAP
         this.maMap = new Map(); 
 
+        // Afficher la resa en cours si refresh 
+        this.keepReservationRunning();
+
         // Ne pas permettre de réservation sans infos
         this.reservationButton.disabled = true;
 
-        this.checkSelectedStation();
-            
+        // Event sur les inputs nom et prénom
+        this.inputSurname.addEventListener('input', () => { 
+            this.checkRegExInput(this.inputSurname, 'userSurname');
+        })
 
-        // Event pour remplir le prénom
-        this.inputName.addEventListener('input', () => {
-            // Test regEx pour valider l'info
-            if (this.inputName.value.length == 0) {
-                this.inputName.style.borderBottom = '1px solid #CACACA';
-            } else if(!this.regex.test(this.inputName.value) || this.inputName.value.length <= 1) {
-                this.inputName.style.borderBottom = '1px solid #F20746';
-                this.inputName.style.color = '#F20746';
-                this.correctName = false;
-            } else {
-                this.inputName.style.borderBottom = '1px solid #56CCCE';
-                this.inputName.style.color = '#56CCCE';
-                this.correctName = true;
-                // Récupérer items (nom/prénom) tapés par USER + localStorage
-                localStorage.setItem("prenomUser", this.inputName.value);
+        this.inputName.addEventListener('input', () => { 
+            this.checkRegExInput(this.inputName, 'userName');  
+        })
+
+        // Event pour sélection station 
+        this.map.addEventListener('click', () => {
+            if (this.maMap.currentStation) {
+                if (this.maMap.currentStation.available_bikes) {
+                    this.bikeAvailable = true;
+                    this.activateButtonReservation();
+                } else {
+                    this.bikeAvailable = false;
+                    this.activateButtonReservation();
+                }
             }
-            this.checkUserInfos();
-            this.activateButtonReservation();
-        }) 
-        
-        // Event pour remplir le nom
-        this.inputSurname.addEventListener('input', () => {
-            if (this.inputSurname.value.length == 0) {
-                this.inputSurname.style.borderBottom = '1px solid #CACACA';
-            } else if (!this.regex.test(this.inputSurname.value) || this.inputSurname.value.length <= 1) {
-                this.inputSurname.style.borderBottom = '1px solid #F20746';
-                this.inputSurname.style.color = '#F20746';
-                this.correctSurname = false;
-            } else {
-                this.inputSurname.style.borderBottom = '1px solid #56CCCE';
-                this.inputSurname.style.color = '#56CCCE';
-                this.correctSurname = true;
-                localStorage.setItem("nomUser", this.inputSurname.value);
-            }
-            this.checkUserInfos();
-            this.activateButtonReservation();
-        }) 
-    
-
-        // Afficher NOM et PRENOM en placeholder de dernière résa sur page si refresh
-        //this.recupNomPrenom();
-
-        // Afficher la resa en cours si refresh 
-        //this.recupResa();
+        })
 
         // Evenement au clic du btnReserver 
         this.reservationButton.addEventListener('click', (e) => {
             // Eviter refresh quand click
             e.preventDefault();     
-            // Afficher CANVAS si :
-            // Une station est selectionnée 
-            if (this.maMap.currentStation) { 
-                // Un vélo est disponible 
-                if (this.maMap.currentStation.available_bikes) {
-                    this.afficherCanvas(); 
-                }
-            } else {
-                this.address.innerHTML = 'Choisissez une station !';
-                this.address.style.color = 'rgba(242, 7, 70, 0.65)';
-            }
+            this.afficherCanvas(); 
         })
-            
-       /* // Evenement au clic du boutonOK du CANVAS
-        this.validation.addEventListener("click", (e) => {
+
+        // Evenement au clic du boutonOK du CANVAS
+        this.validationButtonPopin.addEventListener('click', (e) => {
             // Eviter refresh quand click
             e.preventDefault();
             // Faire disparaitre le CANVAS
-            this.popIn.style.display = "none";
-            // Retirer NOM et PRENOM des input quand affichage resa (esthétique)
+            this.changeStyle('none', 'none', 'none', 'none', '-40');
+           // Retirer NOM et PRENOM des input quand affichage resa (esthétique)
             this.inputSurname.value = null; 
             this.inputName.value = null; 
-            this.inputSurname.removeAttribute("placeholder", localStorage.getItem("nomUser"));
-            this.inputName.removeAttribute("placeholder", localStorage.getItem("prenomUser"));
+            this.inputSurname.removeAttribute("placeholder", localStorage.getItem("userSurname"));
+            this.inputName.removeAttribute("placeholder", localStorage.getItem("userName"));
             // Afficher RESERVATION 
-            this.divResa.style.display = "block";
+            this.bookingArea.style.display = 'block';
             // Démarrer le compteur
             this.decompteTemps();
-            // Scroll automatique sur div resa
-            window.scrollBy(0,400);
             // Récupérer les infos de la station sélectionnée pour les afficher
-            this.leNom.innerHTML = localStorage.getItem("nomUser");
-            this.lePrenom.innerHTML = localStorage.getItem("prenomUser");
-            this.valeurAdresse = this.maMap.currentStation.address;
-            this.lAdresse.innerHTML = this.valeurAdresse.toLowerCase();
+            this.userSurname.innerHTML = localStorage.getItem("userSurname");
+            this.userName.innerHTML = localStorage.getItem("userName");
+            this.addressValue = this.maMap.currentStation.address;
+            this.registeredAddress.innerHTML = this.addressValue.toLowerCase();
             // Stocker en sessionStorage l'adresse
-            sessionStorage.setItem("lAdresse", this.valeurAdresse);
+            sessionStorage.setItem("addressValue", this.addressValue);
             // Désactiver la possibilité de reserver à nouveau
-            this.desactiverFonctionsResa();
+            //this.desactiverFonctionsResa();
         })
 
-       // Evenement si j'annule le compteur
-        this.boutonAnnuler.addEventListener("click", () => {
-            this.annulerTimer(); 
+        // Evenement si j'annule le compteur
+        this.annulationButton.addEventListener("click", () => {
+            this.cancelCountdown(); 
             // Reload page pour nouveau CANVAS sans signature déjà faite
             document.location.reload(true);
-        })*/   
+        })
     }
 
-    activateButtonReservation = () => {
-        if (this.test1 == true && this.test2 == true) {
-            console.log('ok');
-            this.reservationButton.style.backgroundColor = '#56CCCE';
-            this.reservationButton.disabled = false;
-        }
-    }
-
-    checkSelectedStation = () => {
-         this.map.addEventListener('click', () => {
-            if (this.maMap.currentStation) {
-                if (this.maMap.currentStation.available_bikes) {
-                    this.test2 = true;
-                }
-            }
-         })
-    }
-
-    // Méthode pour validité info et activation bouton 'reserver'
-    checkUserInfos = () => {
-        if (this.correctName == true && this.correctSurname == true) {
-            this.test1 = true;
-            /*this.reservationButton.style.backgroundColor = '#56CCCE';
-            this.reservationButton.disabled = false;
+    // Méthode regEx vérification infos user
+    checkRegExInput = (input, storageName) => {
+        if (input.value.length == 0) {
+            input.style.borderBottom = '1px solid #CACACA';
+            this.checkStateInput(false, storageName);
+        } else if(!this.regex.test(input.value) || input.value.length <= 1) {
+            input.style.borderBottom = '1px solid #F20746';
+            input.style.color = '#F20746';
+            this.checkStateInput(false, storageName);
         } else {
-            this.reservationButton.style.backgroundColor = '#CACACA';
-            this.reservationButton.disabled = true;*/
+            input.style.borderBottom = '1px solid #56CCCE';
+            input.style.color = '#56CCCE';
+            this.checkStateInput(true, storageName);
+            // Récupérer items (nom/prénom) tapés par USER + localStorage
+            localStorage.setItem(storageName, input.value);
+        } 
+        this.activateButtonReservation();
+    }
+
+    // Méthode pour valider état de l'input
+    checkStateInput = (state, storageName) => {
+        if (storageName === 'userName') {
+            this.correctName = state;
+        } else if (storageName === 'userSurname') {
+            this.correctSurname = state;
         } 
     }
 
-    // Méthode pour afficher Canvas + regEx pour controler syntaxe champ
-    afficherCanvas = () => {
-        this.popIn.style.display = "flex";
-        let leCanvas = new ObjetCanvas();
-        // Désactiver la possibilité de reserver par dessus
-        //this.desactiverFonctionsResa();
+    // Méthode activation bouton réserver
+    activateButtonReservation = () => {
+        if (this.correctName == true && this.correctSurname == true && this.bikeAvailable == true) {
+            this.reservationButton.disabled = false;
+            this.reservationButton.style.backgroundColor = '#56CCCE';
+        } else {
+            this.reservationButton.disabled = true;
+            this.reservationButton.style.backgroundColor = '#CACACA';
+        }
     }
 
-    /*// Méthode pour stocker données MINUTES dans sessionStorage 
-    stockerDonneesMinutes = () => {
-        sessionStorage.setItem("tps-minutes", this.minutes);
+    // Méthode pour afficher Canvas 
+    afficherCanvas = () => {
+        this.changeStyle('flex', 'block', 'fixed', 'rgba(0, 0, 0, 0.5)', '2000');
+        let leCanvas = new ObjetCanvas();
     }
-        
-    // Méthode pour stocker données SECONDES dans sessionStorage
-    stockerDonneesSecondes = () => {
-        sessionStorage.setItem("tps-secondes", this.secondes);
+
+    // Méthode pour changement UI
+    changeStyle = (displayPopin, displayOverlay, position, bg, zindex) => {
+        this.popIn.style.display = displayPopin;
+        this.overlay.style.display = displayOverlay;
+        this.overlay.style.position = position;
+        this.overlay.style.backgroundColor = bg;
+        this.overlay.style.zIndex = zindex;
     }
 
     // Méthode pour afficher, faire tourner et disparaitre le compteur (si fini)
     decompteTemps = () => {
         // Afficher pa défaut les valeurs du compteur
-        this.tpsMinutes.innerHTML = this.minutes;
-        this.tpsSecondes.innerHTML = this.secondes;
+        this.minutesParagraph.innerHTML = this.minutes;
+        this.secondesParagraph.innerHTML = this.secondes;
         // Stocker la valeur de la première minute
-        this.stockerDonneesMinutes();
+        this.stockDatasMinutes();
 
         // Créer une intervale pour décrémenter temps
         this.intervalToClear = setInterval(() => {
             if (this.secondes >= 1) {
                 this.secondes--;
                 // Afficher nouvelle seconde
-                this.tpsSecondes.innerHTML = this.secondes;
+                this.secondesParagraph.innerHTML = this.secondes;
                 // Stocker données de chaque dernière seconde
-                this.stockerDonneesSecondes();
+                this.stockDatasSecondes();
                 // Mettre un zero en plus (esthétique)
                 if (this.secondes < 10) {
-                     this.tpsSecondes.innerHTML = "0" + this.secondes;
+                     this.secondesParagraph.innerHTML = "0" + this.secondes;
                 }
             } else {
                 // Si seconde = 0 elle se réinitialise
                 this.secondes = 59;
-                this.tpsSecondes.innerHTML = this.secondes;
+                this.secondesParagraph.innerHTML = this.secondes;
                 if (this.minutes > 0){
                     this.minutes--;
                     // Afficher nouvelle minute
-                    this.tpsMinutes.innerHTML = this.minutes;
+                    this.minutesParagraph.innerHTML = this.minutes;
                     // Stocker données de chaque dernière minute
-                    this.stockerDonneesMinutes();
+                    this.stockDatasMinutes();
                     // Mettre un zero en plus (esthétique)
                     if (this.minutes < 10) {
-                        this.tpsMinutes.innerHTML = "0" + this.minutes;
+                        this.minutesParagraph.innerHTML = "0" + this.minutes;
                     }
                 } 
             }
             if (this.minutes == 0 && this.secondes == 0) {
                 // Désactiver la résa (qui est finie)
                 clearInterval(this.intervalToClear);
-                this.divResa.style.display = "none";
+                this.bookingArea.style.display = 'none';
             }
         }, 1000);
     }  
 
-    // Méthode pour annuler le compteur
-    annulerTimer = () => {
-        clearInterval(this.intervalToClear);
-        this.divResa.style.display = "none";
-        // Garder les dernières données NOM / PRENOM en placeholder 
-        this.recupNomPrenom();
-        // Supprimer les données récupérées de la dernière resa
-        sessionStorage.removeItem("address");
-        sessionStorage.removeItem("tps-minutes");
-        sessionStorage.removeItem("tps-secondes");
+    // Méthode pour stocker données MINUTES dans sessionStorage 
+    stockDatasMinutes = () => {
+        sessionStorage.setItem("minutes", this.minutes);
     }
-
-    // Méthode pour recup dernier NOM et PRENOM en suggestion (placeholder) si refresh
-    recupNomPrenom = () => {
-        if (localStorage.getItem("nomUser") && localStorage.getItem("prenomUser")) {
-            this.inputSurname.setAttribute("placeholder", localStorage.getItem("nomUser"));
-            this.inputName.setAttribute("placeholder", localStorage.getItem("prenomUser"));
-        }
+        
+    // Méthode pour stocker données SECONDES dans sessionStorage
+    stockDatasSecondes = () => {
+        sessionStorage.setItem("secondes", this.secondes);
     }
 
     // Méthode pour réafficher resa en cours si refresh page
-    recupResa = () => {
-        if (localStorage.getItem("nomUser") 
-            && localStorage.getItem("prenomUser")
-            && sessionStorage.getItem("address")
-            && sessionStorage.getItem("tps-minutes")
-            && sessionStorage.getItem("tps-secondes")) {
+    keepReservationRunning = () => {
+        if (localStorage.getItem("userSurname") 
+            && localStorage.getItem("userName")
+            && sessionStorage.getItem("addressValue")
+            && sessionStorage.getItem("minutes")
+            && sessionStorage.getItem("secondes")) {
 
             // S'assurer qu'une résa est en cours
-            if (sessionStorage.getItem("tps-secondes") != 0 
-               && sessionStorage.getItem("tps-minutes") != 0) {  
+            if (sessionStorage.getItem("secondes") != 0 
+               && sessionStorage.getItem("minutes") != 0) {  
                 // Afficher la div de la résa
-                this.divResa.style.display = "block";
-                this.divResa.style.position = "relative";
-                this.divResa.style.backgroundColor = "#fdfffe";
-                this.divResa.style.marginTop = "-500px";
-                this.divResa.style.zIndex = "100";
+                this.bookingArea.style.display = "block";
                 // Recupération des données stockées
-                this.leNom.innerHTML = localStorage.getItem("nomUser");
-                this.lePrenom.innerHTML = localStorage.getItem("prenomUser");
-                this.lAdresse.innerHTML = sessionStorage.getItem("lAdresse").toLowerCase();
-                this.minutes = sessionStorage.getItem("tps-minutes"); 
-                this.secondes = sessionStorage.getItem("tps-secondes");
+                this.userSurname.innerHTML = localStorage.getItem("userSurname");
+                this.userName.innerHTML = localStorage.getItem("userName");
+                this.registeredAddress.innerHTML = sessionStorage.getItem("addressValue").toLowerCase();
+                this.minutes = sessionStorage.getItem("minutes"); 
+                this.secondes = sessionStorage.getItem("secondes");
                 // Déclencher le compteur à nouveau avec les dernières données stockées
                 this.decompteTemps();   
                 // Désactiver la possibilité de reserver à nouveau
-                this.desactiverFonctionsResa();
+                //this.desactiverFonctionsResa();
             }  
         }
     }
 
-    // Méthode pour éviter une nouvelle réservation
-    desactiverFonctionsResa = () => {
-        this.reservationButton.disabled = true;
-        this.inputSurname.disabled = true;
-        this.inputName.disabled = true;
-        this.address.style.display = "none";
-        this.inputPlaces.style.display = "none";
-        this.bikesNumber.style.display = "none";
-    }*/
+    // Méthode pour annuler le compteur
+    cancelCountdown = () => {
+        clearInterval(this.intervalToClear);
+        this.bookingArea.style.display = "none";
+        // Garder les dernières données NOM / PRENOM en placeholder 
+        this.getUserId();
+        // Supprimer les données récupérées de la dernière resa
+        sessionStorage.removeItem("addressValue");
+        sessionStorage.removeItem("minutes");
+        sessionStorage.removeItem("secondes");
+    }
 }
 
 export default Reservation;

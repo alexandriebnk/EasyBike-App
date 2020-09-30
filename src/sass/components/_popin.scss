@@ -1,12 +1,37 @@
+#overlay {
+    display: none;
+    background-color: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    z-Index: -40;
+}
+
 .popin {
     background-color: $logo-color;
     position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     border-top-left-radius: 5rem;
     border-top-right-radius: 5rem;
+    border-bottom-left-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+
+    @media (min-width: $breakpoint-medium) {
+       width: 70%;
+    }
+
+    @media (min-width: $breakpoint-large) {
+        width: 40%;
+     }
 
     &__text {
         width: 90%;
@@ -32,6 +57,33 @@
 
 #popin {
     display: none;
+    z-index: 1000;
+
+    &__validation {
+        background-color: $placeholder-color;
+        color: $logo-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3.9rem;
+        width: 35%;
+        font-size: 1.3rem;
+        text-decoration: none;
+        border-radius: 5rem;
+        cursor: pointer;
+        letter-spacing: .08rem;
+        border: none;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        
+        @media (min-width: $breakpoint-medium) {
+            width: 30%;
+        }
+    
+        @media (min-width: $breakpoint-xlarge) {
+            width: 20%;
+        }
+    }
 }
 
 #canvas {
@@ -39,20 +91,3 @@
     border-radius: 4rem;
 }
 
-.validation {
-    background-color: $placeholder-color;
-    color: $logo-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3.9rem;
-    width: 35%;
-    font-size: 1.3rem;
-    text-decoration: none;
-    border-radius: 5rem;
-    cursor: pointer;
-    letter-spacing: .08rem;
-    border: none;
-    margin-top: 3rem;
-    margin-bottom: 3rem
-}

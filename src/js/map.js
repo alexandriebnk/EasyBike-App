@@ -67,6 +67,8 @@ class Map {
                     this.address.innerHTML = (station.address.charAt(0).toUpperCase() + station.address.substring(1).toLowerCase());
                 } else {
                     this.address.innerHTML = 'Adresse non reconnue';
+                    this.bikesNumber.style.color = '#F20746';
+                    this.bikesNumber.innerHTML = 0;
                 }
                 this.bikesNumber.innerHTML = station.available_bikes;
                 if (station.available_bikes > 0) {

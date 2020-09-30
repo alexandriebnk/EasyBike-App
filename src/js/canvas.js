@@ -6,10 +6,12 @@ class ObjetCanvas {
     constructor() { 
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext("2d");
-        this.validation = document.getElementById('validation');
-        this.signer = false;
+        this.validationButtonPopin = document.getElementById('popin__validation');
+        this.signatureOk = false;
         this.positionSouris = {x: 0, y: 0};
         this.dernierePosition = this.positionSouris;
+
+        this.validationButtonPopin.disabled = true;
 
         // Activer la possibilité de déclencher les évènements de la souris 
         this.evenements();
@@ -19,9 +21,10 @@ class ObjetCanvas {
     evenements = () => {
         // Dès que le User clique sur la souris
         this.canvas.addEventListener("mousedown", (e) => {
-            this.signer = true;
+            this.signatureOk = true;
             this.dernierePosition = this.recupPositionSouris(e);
-            this.validation.style.display = "block";
+            this.validationButtonPopin.style.backgroundColor = '#56CCCE';
+            this.validationButtonPopin.disabled = false;
         })
     
         // Dès que le User bouge la souris en étant toujours en mousedown
@@ -32,14 +35,14 @@ class ObjetCanvas {
     
         // Dès que le User arrête le click prolongé
         document.addEventListener("mouseup", (e) => {
-            this.signer = false;
+            this.signatureOk = false;
         })
     }
     
     // Renvoie les coordonnées de la souris 
     recupPositionSouris(mouseEvent) {
         // Si on enregistre une "mouseDown"
-        if (this.signer) {
+        if (this.signatureOk) {
             // Variable qui définit la taille du canvas 
             let oRect = this.canvas.getBoundingClientRect();
             return {
@@ -54,7 +57,7 @@ class ObjetCanvas {
     // Dessin du canvas
     signatureCanvas() {
         // Si on enregistre une "mouseDown"
-        if (this.signer) {
+        if (this.signatureOk) {
             this.context.beginPath();
             this.context.moveTo(this.dernierePosition.x, this.dernierePosition.y);
             this.context.lineTo(this.positionSouris.x, this.positionSouris.y);

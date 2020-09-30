@@ -16,7 +16,7 @@
         <header class="header">
             <div class="header__nav">
                 <p class="header__logo logo">easybike</p>
-                <a href="#reservation-anchor" class="reservation-button button-top">Réserver</a>
+                <a href="#reservation-anchor" class="button button-top">Réserver</a>
             </div>
             <h1 class="header__text">Un vélo, n'importe où, n'importe quand !</h1>
             <div class="bg-video">
@@ -27,6 +27,7 @@
                 </video>
             </div>
         </header>
+
         <section class="section-concept">
             <div class="concept">
                 <h2 class="concept__title">Réserver un vélo n'a jamais été aussi simple</h2>
@@ -85,16 +86,17 @@
         </section>
 
         <section class="section-reservation">
-
-            <div class="popin" id="popin">
-                <div class="popin__text">
-                    <p class="popin__text-title">Confirmation</p>
-                    <p class="popin__text-paragraph">Pour réserver dès maintenant votre vélo, et pour des raisons de sécurité,
-                        votre signature est requise !</p>
+            <div id="overlay">
+                <div class="popin" id="popin">
+                    <div class="popin__text">
+                        <p class="popin__text-title">Confirmation</p>
+                        <p class="popin__text-paragraph">Pour réserver dès maintenant votre vélo, et pour des raisons de sécurité évidentes,
+                            votre signature est requise !</p>
+                    </div>
+                    <canvas id="canvas">"Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour"</canvas>
+                    <button id="popin__validation">Valider</button>
                 </div>
-                <canvas id="canvas">"Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour"</canvas>
-                <button class="validation" id="validation">Valider</button>
-            </div>
+           </div>
 
             <div name="reservation-anchor" id="reservation-anchor" class="reservation">
                 <h3 class="reservation__title">Réservation</h3>
@@ -112,11 +114,41 @@
                         <label for="form__name-input"></label>
                         <input type="text" name="name" id="form__name-input" placeholder="Prénom" required>
                     </div>
-                    <input class="reservation-button form__submit" id="js-form__submit" type="submit" value="Réserver">
+                    <input class="button form__submit" id="js-form__submit" type="submit" value="Réserver">
                 </form>
             </div>
 
             <div class="map" id="js-map"></div>
+        </section>
+
+        <section class="section-booking" id="section-booking">
+            <div class="booking">
+                <div class="booking__state">
+                    <p class="booking__state-inProgress">Réservation en cours</p>
+                    <div class="booking__state-userInfos">
+                        <div id="userInfos__address">
+                            <img src="img/svg/address.svg" id="userInfos__icon">
+                            <p id="userInfos__registered-address"></p>
+                        </div>
+                        <div id="userInfos__id">
+                            <img src="img/svg/user.svg" id="userInfos__icon">
+                            <div id="userInfos__registered">
+                                <p id="userInfos__registered-userName"></p>
+                                <p id="userInfos__registered-userSurname"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking__countdown">
+                    <img src="img/svg/countdown.svg" class="booking__countdown-icon">
+                    <div class="booking__countdown-running">
+                        <p id="minutes-paragraph"></p>
+                        <p id="separation-pts">:</p>
+                        <p id="secondes-paragraph"></p>
+                    </div>
+                </div>
+            </div>
+            <button class="button" id="annulation__button">Annuler</button>
         </section>
 
         <section class="section-newsletter">
@@ -134,6 +166,7 @@
                 <input class="mailing__submit" type="submit" value="S'inscrire">
             </form>
         </section>
+
         <footer class="footer">
             <p class="footer__logo logo">easybike</p>
             <p class="footer__copyright">©2020 Easybike</p>
