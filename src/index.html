@@ -31,12 +31,12 @@
         <section class="section-concept">
             <div class="concept">
                 <h2 class="concept__title">Réserver un vélo n'a jamais été aussi simple</h2>
-                <p class="concept__paragraph">Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-                    irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                    eu fugiat nulla pariatur</p>
+                <p class="concept__paragraph">Ne panique plus à l'idée d'arriver en retard
+                     à un meeting important, ou même à ton premier date depuis longtemps !
+                    Grâce à l'application EasyBike, tu peux désormais prévoir tous tes 
+                    déplacement en amont grâce à un système de réservation qui te laisse 
+                    le temps de te préparer, et d'aller à la station sélectionnée. Avec 
+                    EasyBike, vis ton EasyLife sereinement !</p>
             </div>
             <div class='carrousel' id='carrousel'>
                 <div class="carrousel__images">
@@ -86,7 +86,7 @@
         </section>
 
         <section class="section-reservation">
-            <div id="overlay">
+            <div id="popin__overlay">
                 <div class="popin" id="popin">
                     <div class="popin__text">
                         <p class="popin__text-title">Confirmation</p>
@@ -117,9 +117,30 @@
                     <input class="button form__submit" id="js-form__submit" type="submit" value="Réserver">
                 </form>
             </div>
-
+            
             <div class="map" id="js-map"></div>
+            
         </section>
+
+        <section class="section-newsletter">
+            <div class="newsletter">
+                <h3 class="newsletter__title">Newsletter</h3>
+                <p class="newsletter__paragraph">Inscris-toi dès maintenant pour recevoir les updates 
+                    de ton application favorite, et les tutos pour conduire sans les mains pour impressionner la galerie !</p>
+            </div>
+            <form action="#" method="get" class="mailing">
+                <div class="mailing__email">
+                    <label for="email"></label>
+                    <input type="email" name="email" id="email" class="mailing__email-input" placeholder="Adresse email" required>
+                </div>
+                <input class="mailing__submit" type="submit" value="S'inscrire">
+            </form>
+        </section>
+
+        <footer class="footer">
+            <p class="footer__logo logo">easybike</p>
+            <p class="footer__copyright">©2020 Easybike</p>
+        </footer>
 
         <section class="section-booking" id="section-booking">
             <div class="booking">
@@ -150,27 +171,6 @@
             </div>
             <button class="button" id="annulation__button">Annuler</button>
         </section>
-
-        <section class="section-newsletter">
-            <div class="newsletter">
-                <h3 class="newsletter__title">Newsletter</h3>
-                <p class="newsletter__paragraph">Ut enim ad minim veniam, quis nostrud exercitation 
-                    ullamco laboris nisi ut aliquip ex ea commodo.
-                    laboris nisi ut aliquip ex ea commodo</p>
-            </div>
-            <form action="#" method="get" class="mailing">
-                <div class="mailing__email">
-                    <label for="email"></label>
-                    <input type="email" name="email" id="email" class="mailing__email-input" placeholder="Adresse email" required>
-                </div>
-                <input class="mailing__submit" type="submit" value="S'inscrire">
-            </form>
-        </section>
-
-        <footer class="footer">
-            <p class="footer__logo logo">easybike</p>
-            <p class="footer__copyright">©2020 Easybike</p>
-        </footer>
 
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="

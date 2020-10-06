@@ -54,5 +54,18 @@
     margin-bottom: 2rem;
     margin-top: .5rem;
     border: none;
+
+    @media (min-width: $breakpoint-medium) {
+        width: 25%;
+        font-size: 1.8rem;
+    }
+
+    @media (min-width: $breakpoint-large) {
+        width: 20%;
+    }
+
+    @media (min-width: $breakpoint-xlarge) {
+        width: 13%;
+    }
 }
 

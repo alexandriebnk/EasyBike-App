@@ -14,6 +14,7 @@ class Reservation {
         this.inputSurname = document.getElementById("form__surname-input");
         this.inputName = document.getElementById("form__name-input");
         this.reservationButton = document.getElementById("js-form__submit");
+        this.footer = document.getElementById("footer");
         // Datas
         this.correctSurname = null;
         this.correctName = null;
@@ -24,7 +25,7 @@ class Reservation {
         this.addressValue = null;
         // Canvas
         this.popIn = document.getElementById('popin');
-        this.overlay = document.getElementById('overlay');
+        this.popInOverlay = document.getElementById('popin__overlay');
         this.validationButtonPopin = document.getElementById('popin__validation');
         // Reservation
         this.bookingArea = document.getElementById('section-booking');
@@ -79,15 +80,14 @@ class Reservation {
             e.preventDefault();
             // Faire disparaitre le CANVAS
             // Désactiver la possibilité de reserver à nouveau
-            this.changeStylePopin('none', 'block', 'fixed', 'rgba(0, 0, 0, 0.1)', '2000', '3000');
-            this.changeStyleBooking();
-           // Retirer NOM et PRENOM des input quand affichage resa (esthétique)
-            this.inputSurname.value = null; 
-            this.inputName.value = null; 
-            this.inputSurname.removeAttribute("placeholder", localStorage.getItem("userSurname"));
-            this.inputName.removeAttribute("placeholder", localStorage.getItem("userName"));
+            this.changeStylePopin('none', 'none', 'none', 'none', '-40');
             // Afficher RESERVATION 
-            this.bookingArea.style.display = 'block';
+            this.changeStyleBooking();
+            this.inputSurname.value = '';
+            this.inputName.value = '';
+           // Retirer NOM et PRENOM des input quand affichage resa (esthétique)
+            this.inputSurname.removeAttribute(localStorage.getItem("userSurname"));
+            this.inputName.removeAttribute(localStorage.getItem("userName"));
             // Démarrer le compteur
             this.decompteTemps();
             // Récupérer les infos de la station sélectionnée pour les afficher
@@ -137,7 +137,7 @@ class Reservation {
 
     // Méthode activation bouton réserver
     activateButtonReservation = () => {
-        if (this.correctName == true && this.correctSurname == true && this.bikeAvailable == true) {
+        if (this.correctName == true && this.correctSurname == true && this.bikeAvailable == true && this.bookingArea.style.display != 'flex') {
             this.reservationButton.disabled = false;
             this.reservationButton.style.backgroundColor = '#56CCCE';
         } else {
@@ -148,22 +148,23 @@ class Reservation {
 
     // Méthode pour afficher Canvas 
     afficherCanvas = () => {
-        this.changeStylePopin('flex', 'block', 'fixed', 'rgba(0, 0, 0, 0.5)', '2000', '3000');
+        this.changeStylePopin('flex', 'block', 'fixed', 'rgba(0, 0, 0, 0.5)', '2000');
         let leCanvas = new ObjetCanvas();
     }
 
-    // Méthode pour changement UI
-    changeStylePopin = (displayPopin, displayOverlay, position, bg, zindexOverlay, zindexBooking) => {
+    // Méthode pour changement UI pendant popIn
+    changeStylePopin = (displayPopin, displayOverlay, position, bg, zindexOverlay) => {
         this.popIn.style.display = displayPopin;
-        this.overlay.style.display = displayOverlay;
-        this.overlay.style.position = position;
-        this.overlay.style.backgroundColor = bg;
-        this.overlay.style.zIndex = zindexOverlay;
-        this.bookingArea.style.zIndex = zindexBooking;
+        this.popInOverlay.style.display = displayOverlay;
+        this.popInOverlay.style.position = position;
+        this.popInOverlay.style.backgroundColor = bg;
+        this.popInOverlay.style.zIndex = zindexOverlay;
     }
 
     // Méthode pour changer UI pendant booking
     changeStyleBooking = () => {
+        this.bookingArea.style.display = 'flex';
+        this.bookingArea.style.zIndex = '1000';
         this.inputName.style.borderBottom = '1px solid #CACACA';
         this.inputSurname.style.borderBottom = '1px solid #CACACA';
         this.reservationButton.style.backgroundColor = '#CACACA';
@@ -234,12 +235,11 @@ class Reservation {
             && sessionStorage.getItem("addressValue")
             && sessionStorage.getItem("minutes")
             && sessionStorage.getItem("secondes")) {
-
             // S'assurer qu'une résa est en cours
             if (sessionStorage.getItem("secondes") != 0 
                && sessionStorage.getItem("minutes") != 0) {  
                 // Afficher la div de la résa
-                this.bookingArea.style.display = "block";
+                this.changeStyleBooking();
                 // Recupération des données stockées
                 this.userSurname.innerHTML = localStorage.getItem("userSurname");
                 this.userName.innerHTML = localStorage.getItem("userName");
@@ -248,8 +248,6 @@ class Reservation {
                 this.secondes = sessionStorage.getItem("secondes");
                 // Déclencher le compteur à nouveau avec les dernières données stockées
                 this.decompteTemps();   
-                // Désactiver la possibilité de reserver à nouveau
-                //this.desactiverFonctionsResa();
             }  
         }
     }

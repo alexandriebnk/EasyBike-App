@@ -13,12 +13,22 @@ module.exports = {
 				use: ["html-loader"]
 			},
 			{
-				test: /\.svg|png|jpg|gif$/,
+				test: /\.png|jpg|gif$/,
 				use: {
 					loader : "file-loader",
 					options : {
 						name: "[name].[ext]",
 						outputPath: "img"
+					}
+				}
+			},
+			{
+				test: /\.svg$/,
+				use: {
+					loader : "file-loader",
+					options : {
+						name: "[name].[ext]",
+						outputPath: "img/svg"
 					}
 				}
 			},
@@ -34,10 +44,10 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				loader: 'babel-loader',
+				loader: "babel-loader",
 				exclude: /node_modules/,
 				query: {
-				  plugins: ['transform-class-properties']
+				  plugins: ["transform-class-properties"]
 				}
 			}
 		]

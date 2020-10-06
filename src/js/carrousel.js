@@ -81,9 +81,6 @@ class Carrousel {
             this.intervalles = setInterval(this.goRight, 3000);
         }  
     }
-      
-
-
 }
 
 export default Carrousel;

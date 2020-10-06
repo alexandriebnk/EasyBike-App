@@ -6,6 +6,16 @@
     margin-left: auto;
     margin-top: 2.7rem;
 
+    @media (min-width: $breakpoint-medium) {
+        width: 85%;
+        margin-top: 3.3rem;
+    }
+
+    @media (min-width: $breakpoint-xlarge) {
+        width: 65%;
+        margin-top: 0;
+    }
+
 
     &__state {
         display: flex;
@@ -13,17 +23,47 @@
         width: 73%;
         margin-top: .4rem;
 
+        @media (min-width: $breakpoint-medium) {
+            margin-top: 0;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 70%;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
         &-inProgress {
             color: $logo-color;
             font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: .1rem;
+
+            @media (min-width: $breakpoint-medium) {
+                font-size: 2rem;
+            }
+
+            @media (min-width: $breakpoint-xlarge) {
+                width: 50%;
+            }
         }
     
         &-userInfos {
             display: flex;
             flex-direction: column;
             margin-top: 1.6rem;
+
+            @media (min-width: $breakpoint-medium) {
+                margin-top: 1.3rem;
+            }
+
+            @media (min-width: $breakpoint-xlarge) {
+                margin-top: 0;
+                width: 50%;
+            }
         }
     }
 
@@ -31,17 +71,31 @@
         display: flex;
         flex-direction: row;
         align-items: flex-start;
+        justify-content: flex-end;
         width: 27%;
+
+        @media (min-width: $breakpoint-xlarge) {
+            align-items: center;
+            justify-content: center;
+        }
 
 
         &-icon {
             margin-right: 1rem;
             margin-top: .2rem;
+
+            @media (min-width: $breakpoint-medium) {
+                width: 3rem;
+            }
         }
 
         &-running {
             display: flex;
             flex-direction: row;
+
+            @media (min-width: $breakpoint-xlarge) {
+                margin-top: .5rem;
+            }
         }
     }
 }
@@ -71,6 +125,10 @@
             margin-left: .7rem;
             margin-top: .3rem;
             font-size: 1.2rem;
+
+            @media (min-width: $breakpoint-medium) {
+                font-size: 1.6rem;
+            }
         }
     }
 }
@@ -80,6 +138,14 @@
 #secondes-paragraph {
     color: $logo-color;
     font-size: 2rem;
+
+    @media (min-width: $breakpoint-medium) {
+        font-size: 2.5rem;
+    }
+
+    @media (min-width: $breakpoint-xlarge) {
+        font-size: 2.3rem;
+    }
 }
 
 #separation-pts {

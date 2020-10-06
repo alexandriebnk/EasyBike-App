@@ -26,13 +26,16 @@
     margin-top: 1rem;
     border: none;
     border-bottom: 1px solid $placeholder-color;
+    font-size: 1.5rem;
 
     @media (min-width: $breakpoint-medium) {
         height: 8rem;
+        font-size: 2.5rem;
     }
 
     @media (min-width: $breakpoint-xlarge) {
         height: 4rem;
+        font-size: 1.5rem;
     }
 
     &::placeholder {

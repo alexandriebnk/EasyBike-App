@@ -4,44 +4,44 @@
 
 class ObjetCanvas {
     constructor() { 
-        this.canvas = document.getElementById("canvas");
-        this.context = this.canvas.getContext("2d");
+        this.canvas = document.getElementById('canvas');
+        this.context = this.canvas.getContext('2d');
         this.validationButtonPopin = document.getElementById('popin__validation');
         this.signatureOk = false;
-        this.positionSouris = {x: 0, y: 0};
-        this.dernierePosition = this.positionSouris;
+        this.mousePosition = {x: 0, y: 0};
+        this.lastPosition = this.mousePosition;
 
         this.validationButtonPopin.disabled = true;
 
         // Activer la possibilité de déclencher les évènements de la souris 
-        this.evenements();
+        this.activateEvents();
     }
 
     // Méthode pour déclencher événements souris
-    evenements = () => {
+    activateEvents = () => {
         // Dès que le User clique sur la souris
-        this.canvas.addEventListener("mousedown", (e) => {
+        this.canvas.addEventListener('mousedown', (e) => {
             this.signatureOk = true;
-            this.dernierePosition = this.recupPositionSouris(e);
+            this.lastPosition = this.getMousePosition(e);
             this.validationButtonPopin.style.backgroundColor = '#56CCCE';
             this.validationButtonPopin.disabled = false;
         })
     
         // Dès que le User bouge la souris en étant toujours en mousedown
-        this.canvas.addEventListener("mousemove", (e) => {
-            this.positionSouris = this.recupPositionSouris(e);
-            this.signatureCanvas();
+        this.canvas.addEventListener('mousemove', (e) => {
+            this.mousePosition = this.getMousePosition(e);
+            this.canvasSignature();
         })
     
         // Dès que le User arrête le click prolongé
-        document.addEventListener("mouseup", (e) => {
+        document.addEventListener('mouseup', (e) => {
             this.signatureOk = false;
         })
     }
     
     // Renvoie les coordonnées de la souris 
-    recupPositionSouris(mouseEvent) {
-        // Si on enregistre une "mouseDown"
+    getMousePosition(mouseEvent) {
+        // Si on enregistre une 'mouseDown'
         if (this.signatureOk) {
             // Variable qui définit la taille du canvas 
             let oRect = this.canvas.getBoundingClientRect();
@@ -55,16 +55,16 @@ class ObjetCanvas {
     }
     
     // Dessin du canvas
-    signatureCanvas() {
-        // Si on enregistre une "mouseDown"
+    canvasSignature() {
+        // Si on enregistre une 'mouseDown'
         if (this.signatureOk) {
             this.context.beginPath();
-            this.context.moveTo(this.dernierePosition.x, this.dernierePosition.y);
-            this.context.lineTo(this.positionSouris.x, this.positionSouris.y);
+            this.context.moveTo(this.lastPosition.x, this.lastPosition.y);
+            this.context.lineTo(this.mousePosition.x, this.mousePosition.y);
             this.context.stroke();
-            this.context.strokeStyle = "#a1e8cd";
+            this.context.strokeStyle = '#56CCCE';
             this.context.lineWidth = 3;
-            this.dernierePosition = this.positionSouris;
+            this.lastPosition = this.mousePosition;
         }
     }   
 }
