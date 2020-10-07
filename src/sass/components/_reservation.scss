@@ -4,13 +4,15 @@
     margin-bottom: 5rem;
 
     @media (min-width: $breakpoint-medium) {
-        margin-top: 12rem;
-        margin-bottom: 12rem;
+        margin-top: 9rem;
+        margin-bottom: 9rem;
     }
 
     @media (min-width: $breakpoint-xlarge) {
         width: 30%;
         margin-top: 0;
+        margin-right: auto;
+        margin-left: auto;
     }
 
     &__title {
@@ -40,10 +42,10 @@
         &-number {
             color: $paragraph-color;
             font-weight: 700;
-            font-size: 2.3rem;
+            font-size: 3rem;
 
             @media (min-width: $breakpoint-medium) {
-                font-size: 3rem;
+                font-size: 4rem;
             }
         }
     }
@@ -51,10 +53,11 @@
     &__address {
         color: $paragraph-color;
         font-weight: 700;
-        font-size: 1.9rem;
+        font-size: 2.1rem;
         margin-top: 3rem;
 
         @media (min-width: $breakpoint-medium) {
+            margin-top: 4rem;
             font-size: 2.8rem;
         }
 

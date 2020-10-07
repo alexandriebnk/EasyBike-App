@@ -9,18 +9,23 @@
 
     @media (min-width: $breakpoint-xlarge) {
         width: 50%;
+        justify-content: flex-end;
     }
         
     &__email-input {
         height: 5rem;
         border: none;
-        width: 25rem;
+        width: 23rem;
         border-top-left-radius: 10rem;
         border-bottom-left-radius: 10rem;
         padding-left: 4rem;
 
-        @media (min-width: $breakpoint-xlarge) {
-            width: 50rem;
+        @media (min-width: $breakpoint-medium) {
+            width: 30rem;
+        }
+
+        @media (min-width: $breakpoint-large) {
+            width: 40rem;
         }
 
         &::placeholder {
@@ -37,5 +42,9 @@
         border: none;
         border-top-right-radius: 10rem;
         border-bottom-right-radius: 10rem;
+
+        @media (min-width: $breakpoint-large) {
+            width: 13rem;
+        }
     }
 }

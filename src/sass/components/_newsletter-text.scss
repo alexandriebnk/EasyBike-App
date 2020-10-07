@@ -13,11 +13,12 @@
         margin-bottom: 1rem;
 
         @media (min-width: $breakpoint-medium) {
-            font-size: 3rem;
+            font-size: 4rem;
         }
 
-        @media (min-width: $breakpoint-large) {
-            font-size: 4rem;
+        @media (min-width: $breakpoint-xlarge) {
+            margin-top: 6rem;
+            margin-bottom: 2rem;
         }
     }
 

@@ -16,7 +16,6 @@
         margin-top: 0;
     }
 
-
     &__state {
         display: flex;
         flex-direction: column;
@@ -79,7 +78,6 @@
             justify-content: center;
         }
 
-
         &-icon {
             margin-right: 1rem;
             margin-top: .2rem;
@@ -135,7 +133,7 @@
 
 #minutes-paragraph,
 #separation-pts, 
-#secondes-paragraph {
+#seconds-paragraph {
     color: $logo-color;
     font-size: 2rem;
 

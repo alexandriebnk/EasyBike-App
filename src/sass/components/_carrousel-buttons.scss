@@ -18,7 +18,11 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        width: 17%;
+        width: 27%;
+
+        @media (min-width: $breakpoint-large) {
+            width: 17%;
+        }
     }
 
     &-left,
@@ -26,7 +30,6 @@
         cursor: pointer;
         transition: all 0.2s ease;
         
-
         &:hover {
             transform: scale(1.1);
         }

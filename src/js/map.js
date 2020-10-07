@@ -15,6 +15,8 @@ class Map {
         this.currentStation = null;
         this.activeMarker = null;
         this.activeStation = null;
+        this.reservedMarker = null;
+        this.reservedStation = null;
 
         // Initialiser la map
         this.initMap();
@@ -95,24 +97,45 @@ class Map {
 
     // Méthode pour créer une icône différent pour selection station par user
     changeIcons = (marker, station) => {
-        if (this.activeMarker) {
+        // Si une station est déjà sélectionné
+        if (marker === this.reservedMarker) {
+            return;
+        }
+
+        if (this.activeMarker && this.activeMarker !== this.reservedMarker) {
             let stationIcon = L.icon({
                 iconUrl: stationSvg,
                 iconSize: [30, 30],
                 iconAnchor: [this.activeStation.position.lat, this.activeStation.position.lng] 
             });
+            // Je change celle d'avant en bleu
             this.activeMarker.setIcon(stationIcon);
         }
-        let stationSelectedIcon = L.icon({
-            iconUrl: stationSvgSelected,
+
+        // Dans tous les cas, quand je sélectionne, elle grandit
+        let stationIcon = L.icon({
+            iconUrl: stationSvg,
             iconSize: [50, 50],
             iconAnchor: [station.position.lat, station.position.lng] 
         });
-        marker.setIcon(stationSelectedIcon);
+        marker.setIcon(stationIcon);
 
+        // Le marker en question devient sélectionné
         this.activeMarker = marker;
         this.activeStation = station;
-    } 
+    }   
+
+    displayReservedIcon = () => {
+        this.reservedStation = this.activeStation;
+        this.reservedMarker = this.activeMarker;
+
+        let stationSelectedIcon = L.icon({
+            iconUrl: stationSvgSelected,
+            iconSize: [50, 50],
+            iconAnchor: [this.reservedStation.position.lat, this.reservedStation.position.lng] 
+        });
+        this.reservedMarker.setIcon(stationSelectedIcon);
+    }
 } 
 
 export default Map;

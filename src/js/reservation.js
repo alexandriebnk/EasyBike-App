@@ -8,20 +8,19 @@ import ObjetCanvas from './canvas';
 class Reservation {
     constructor() {
         // UI 
-        this.map = document.getElementById("js-map");
-        this.address = document.getElementById("js-reservation__address");
-        this.bikesNumber = document.getElementById("js-reservation__illustrations-number");
-        this.inputSurname = document.getElementById("form__surname-input");
-        this.inputName = document.getElementById("form__name-input");
-        this.reservationButton = document.getElementById("js-form__submit");
-        this.footer = document.getElementById("footer");
+        this.map = document.getElementById('js-map');
+        this.address = document.getElementById('js-reservation__address');
+        this.bikesNumber = document.getElementById('js-reservation__illustrations-number');
+        this.inputSurname = document.getElementById('form__surname-input');
+        this.inputName = document.getElementById('form__name-input');
+        this.bookingButton = document.getElementById('js-form__submit');
+        this.footer = document.getElementById('footer');
         // Datas
         this.correctSurname = null;
         this.correctName = null;
         this.bikeAvailable = null;
-        this.regex = /^[A-Za-zàäâéèëêïîôùüÿçœ\'-]+$/;
         this.minutes = 19;
-        this.secondes = 59;
+        this.seconds = 59;
         this.addressValue = null;
         // Canvas
         this.popIn = document.getElementById('popin');
@@ -29,21 +28,21 @@ class Reservation {
         this.validationButtonPopin = document.getElementById('popin__validation');
         // Reservation
         this.bookingArea = document.getElementById('section-booking');
-        this.minutesParagraph = document.getElementById("minutes-paragraph");
-        this.secondesParagraph = document.getElementById("secondes-paragraph");
-        this.registeredAddress = document.getElementById("userInfos__registered-address");
+        this.minutesParagraph = document.getElementById('minutes-paragraph');
+        this.secondsParagraph = document.getElementById('seconds-paragraph');
+        this.registeredAddress = document.getElementById('userInfos__registered-address');
         this.userName = document.getElementById('userInfos__registered-userName');
         this.userSurname = document.getElementById('userInfos__registered-userSurname');
-        this.annulationButton = document.getElementById("annulation__button");
+        this.cancelButton = document.getElementById('cancel__button');
 
         // Instance de la classe MAP
         this.maMap = new Map(); 
 
         // Afficher la resa en cours si refresh 
-        this.keepReservationRunning();
+        this.keepBookingRunning();
 
         // Ne pas permettre de réservation sans infos
-        this.reservationButton.disabled = true;
+        this.bookingButton.disabled = true;
 
         // Event sur les inputs nom et prénom
         this.inputSurname.addEventListener('input', () => { 
@@ -55,20 +54,10 @@ class Reservation {
         })
 
         // Event pour sélection station 
-        this.map.addEventListener('click', () => {
-            if (this.maMap.currentStation) {
-                if (this.maMap.currentStation.available_bikes) {
-                    this.bikeAvailable = true;
-                    this.activateButtonReservation();
-                } else {
-                    this.bikeAvailable = false;
-                    this.activateButtonReservation();
-                }
-            }
-        })
+        this.map.addEventListener('click', this.selectStation);
 
         // Evenement au clic du btnReserver 
-        this.reservationButton.addEventListener('click', (e) => {
+        this.bookingButton.addEventListener('click', (e) => {
             // Eviter refresh quand click
             e.preventDefault();     
             this.afficherCanvas(); 
@@ -86,33 +75,49 @@ class Reservation {
             this.inputSurname.value = '';
             this.inputName.value = '';
            // Retirer NOM et PRENOM des input quand affichage resa (esthétique)
-            this.inputSurname.removeAttribute(localStorage.getItem("userSurname"));
-            this.inputName.removeAttribute(localStorage.getItem("userName"));
+            this.inputSurname.removeAttribute(localStorage.getItem('userSurname'));
+            this.inputName.removeAttribute(localStorage.getItem('userName'));
             // Démarrer le compteur
-            this.decompteTemps();
+            this.countdown();
             // Récupérer les infos de la station sélectionnée pour les afficher
-            this.userSurname.innerHTML = localStorage.getItem("userSurname");
-            this.userName.innerHTML = localStorage.getItem("userName");
+            this.userSurname.innerHTML = localStorage.getItem('userSurname');
+            this.userName.innerHTML = localStorage.getItem('userName');
             this.addressValue = this.maMap.currentStation.address;
             this.registeredAddress.innerHTML = this.addressValue.toLowerCase();
             // Stocker en sessionStorage l'adresse
-            sessionStorage.setItem("addressValue", this.addressValue);
+            sessionStorage.setItem('addressValue', this.addressValue);
+            this.maMap.displayReservedIcon();
         })
 
         // Evenement si j'annule le compteur
-        this.annulationButton.addEventListener("click", () => {
+        this.cancelButton.addEventListener('click', () => {
             this.cancelCountdown(); 
             // Reload page pour nouveau CANVAS sans signature déjà faite
             document.location.reload(true);
         })
     }
 
+    // Méthode pour sélectionner station avec vélos disponibles
+    selectStation = () => {
+        if (this.maMap.currentStation) {
+            if (this.maMap.currentStation.available_bikes) {
+                this.bikeAvailable = true;
+                this.activateButtonBooking();
+            } else {
+                this.bikeAvailable = false;
+                this.activateButtonBooking();
+            }
+        }
+    }
+
     // Méthode regEx vérification infos user
     checkRegExInput = (input, storageName) => {
+        let regEx = /^[A-Za-zàäâéèëêïîôùüÿçœ\'-]+$/;
+
         if (input.value.length == 0) {
             input.style.borderBottom = '1px solid #CACACA';
             this.checkStateInput(false, storageName);
-        } else if(!this.regex.test(input.value) || input.value.length <= 1) {
+        } else if(!regEx.test(input.value) || input.value.length <= 1) {
             input.style.borderBottom = '1px solid #F20746';
             input.style.color = '#F20746';
             this.checkStateInput(false, storageName);
@@ -123,7 +128,7 @@ class Reservation {
             // Récupérer items (nom/prénom) tapés par USER + localStorage
             localStorage.setItem(storageName, input.value);
         } 
-        this.activateButtonReservation();
+        this.activateButtonBooking();
     }
 
     // Méthode pour valider état de l'input
@@ -136,13 +141,13 @@ class Reservation {
     }
 
     // Méthode activation bouton réserver
-    activateButtonReservation = () => {
+    activateButtonBooking = () => {
         if (this.correctName == true && this.correctSurname == true && this.bikeAvailable == true && this.bookingArea.style.display != 'flex') {
-            this.reservationButton.disabled = false;
-            this.reservationButton.style.backgroundColor = '#56CCCE';
+            this.bookingButton.disabled = false;
+            this.bookingButton.style.backgroundColor = '#56CCCE';
         } else {
-            this.reservationButton.disabled = true;
-            this.reservationButton.style.backgroundColor = '#CACACA';
+            this.bookingButton.disabled = true;
+            this.bookingButton.style.backgroundColor = '#CACACA';
         }
     }
 
@@ -167,7 +172,7 @@ class Reservation {
         this.bookingArea.style.zIndex = '1000';
         this.inputName.style.borderBottom = '1px solid #CACACA';
         this.inputSurname.style.borderBottom = '1px solid #CACACA';
-        this.reservationButton.style.backgroundColor = '#CACACA';
+        this.bookingButton.style.backgroundColor = '#CACACA';
         this.bikesNumber.innerHTML = '0';
         this.address.innerHTML = 'Adresse de la station';
         this.bikesNumber.style.color = '#8D8D8D';
@@ -175,29 +180,29 @@ class Reservation {
     }
 
     // Méthode pour afficher, faire tourner et disparaitre le compteur (si fini)
-    decompteTemps = () => {
+    countdown = () => {
         // Afficher pa défaut les valeurs du compteur
         this.minutesParagraph.innerHTML = this.minutes;
-        this.secondesParagraph.innerHTML = this.secondes;
+        this.secondsParagraph.innerHTML = this.seconds;
         // Stocker la valeur de la première minute
         this.stockDatasMinutes();
 
         // Créer une intervale pour décrémenter temps
         this.intervalToClear = setInterval(() => {
-            if (this.secondes >= 1) {
-                this.secondes--;
+            if (this.seconds >= 1) {
+                this.seconds--;
                 // Afficher nouvelle seconde
-                this.secondesParagraph.innerHTML = this.secondes;
+                this.secondsParagraph.innerHTML = this.seconds;
                 // Stocker données de chaque dernière seconde
-                this.stockDatasSecondes();
+                this.stockDatasSeconds();
                 // Mettre un zero en plus (esthétique)
-                if (this.secondes < 10) {
-                     this.secondesParagraph.innerHTML = "0" + this.secondes;
+                if (this.seconds < 10) {
+                     this.secondsParagraph.innerHTML = '0' + this.seconds;
                 }
             } else {
                 // Si seconde = 0 elle se réinitialise
-                this.secondes = 59;
-                this.secondesParagraph.innerHTML = this.secondes;
+                this.seconds = 59;
+                this.secondsParagraph.innerHTML = this.seconds;
                 if (this.minutes > 0){
                     this.minutes--;
                     // Afficher nouvelle minute
@@ -206,11 +211,11 @@ class Reservation {
                     this.stockDatasMinutes();
                     // Mettre un zero en plus (esthétique)
                     if (this.minutes < 10) {
-                        this.minutesParagraph.innerHTML = "0" + this.minutes;
+                        this.minutesParagraph.innerHTML = '0' + this.minutes;
                     }
                 } 
             }
-            if (this.minutes == 0 && this.secondes == 0) {
+            if (this.minutes == 0 && this.seconds == 0) {
                 // Désactiver la résa (qui est finie)
                 clearInterval(this.intervalToClear);
                 this.bookingArea.style.display = 'none';
@@ -220,34 +225,34 @@ class Reservation {
 
     // Méthode pour stocker données MINUTES dans sessionStorage 
     stockDatasMinutes = () => {
-        sessionStorage.setItem("minutes", this.minutes);
+        sessionStorage.setItem('minutes', this.minutes);
     }
         
     // Méthode pour stocker données SECONDES dans sessionStorage
-    stockDatasSecondes = () => {
-        sessionStorage.setItem("secondes", this.secondes);
+    stockDatasSeconds = () => {
+        sessionStorage.setItem('seconds', this.seconds);
     }
 
     // Méthode pour réafficher resa en cours si refresh page
-    keepReservationRunning = () => {
-        if (localStorage.getItem("userSurname") 
-            && localStorage.getItem("userName")
-            && sessionStorage.getItem("addressValue")
-            && sessionStorage.getItem("minutes")
-            && sessionStorage.getItem("secondes")) {
+    keepBookingRunning = () => {
+        if (localStorage.getItem('userSurname') 
+            && localStorage.getItem('userName')
+            && sessionStorage.getItem('addressValue')
+            && sessionStorage.getItem('minutes')
+            && sessionStorage.getItem('seconds')) {
             // S'assurer qu'une résa est en cours
-            if (sessionStorage.getItem("secondes") != 0 
-               && sessionStorage.getItem("minutes") != 0) {  
+            if (sessionStorage.getItem('seconds') != 0 
+               && sessionStorage.getItem('minutes') != 0) {  
                 // Afficher la div de la résa
                 this.changeStyleBooking();
                 // Recupération des données stockées
-                this.userSurname.innerHTML = localStorage.getItem("userSurname");
-                this.userName.innerHTML = localStorage.getItem("userName");
-                this.registeredAddress.innerHTML = sessionStorage.getItem("addressValue").toLowerCase();
-                this.minutes = sessionStorage.getItem("minutes"); 
-                this.secondes = sessionStorage.getItem("secondes");
+                this.userSurname.innerHTML = localStorage.getItem('userSurname');
+                this.userName.innerHTML = localStorage.getItem('userName');
+                this.registeredAddress.innerHTML = sessionStorage.getItem('addressValue').toLowerCase();
+                this.minutes = sessionStorage.getItem('minutes'); 
+                this.seconds = sessionStorage.getItem('seconds');
                 // Déclencher le compteur à nouveau avec les dernières données stockées
-                this.decompteTemps();   
+                this.countdown();   
             }  
         }
     }
@@ -255,11 +260,11 @@ class Reservation {
     // Méthode pour annuler le compteur
     cancelCountdown = () => {
         clearInterval(this.intervalToClear);
-        this.bookingArea.style.display = "none";
+        this.bookingArea.style.display = 'none';
         // Supprimer les données récupérées de la dernière resa
-        sessionStorage.removeItem("addressValue");
-        sessionStorage.removeItem("minutes");
-        sessionStorage.removeItem("secondes");
+        sessionStorage.removeItem('addressValue');
+        sessionStorage.removeItem('minutes');
+        sessionStorage.removeItem('seconds');
     }
 }
 

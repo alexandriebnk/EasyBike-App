@@ -11,6 +11,7 @@ class ObjetCanvas {
         this.mousePosition = {x: 0, y: 0};
         this.lastPosition = this.mousePosition;
 
+        // Désactiver bouton validation si pas de signature
         this.validationButtonPopin.disabled = true;
 
         // Activer la possibilité de déclencher les évènements de la souris 
@@ -21,25 +22,31 @@ class ObjetCanvas {
     activateEvents = () => {
         // Dès que le User clique sur la souris
         this.canvas.addEventListener('mousedown', (e) => {
+            // Changer le booléen qui permet déclenchement de la signature
             this.signatureOk = true;
+            // Suivre la position de la souris pour savoir quand elle se termine
             this.lastPosition = this.getMousePosition(e);
+            // Activer bouton de validation
             this.validationButtonPopin.style.backgroundColor = '#56CCCE';
             this.validationButtonPopin.disabled = false;
         })
     
-        // Dès que le User bouge la souris en étant toujours en mousedown
+        // Dès que le user bouge la souris en étant toujours en mousedown
         this.canvas.addEventListener('mousemove', (e) => {
+            // Enregistrer positon de la souris
             this.mousePosition = this.getMousePosition(e);
+            // Permettre la signature sur le canvas
             this.canvasSignature();
         })
     
         // Dès que le User arrête le click prolongé
         document.addEventListener('mouseup', (e) => {
+            // Changer le booléen qui permet déclenchement de la signature
             this.signatureOk = false;
         })
     }
     
-    // Renvoie les coordonnées de la souris 
+    // Méthode pour renvoyer les coordonnées de la souris 
     getMousePosition(mouseEvent) {
         // Si on enregistre une 'mouseDown'
         if (this.signatureOk) {
@@ -54,10 +61,11 @@ class ObjetCanvas {
         }
     }
     
-    // Dessin du canvas
+    // Méthode pour signer sur canvas
     canvasSignature() {
         // Si on enregistre une 'mouseDown'
         if (this.signatureOk) {
+            // Construction de la zone du canvas + définition du style
             this.context.beginPath();
             this.context.moveTo(this.lastPosition.x, this.lastPosition.y);
             this.context.lineTo(this.mousePosition.x, this.mousePosition.y);
