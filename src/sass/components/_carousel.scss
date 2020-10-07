@@ -1,4 +1,4 @@
-.carrousel {
+.carousel {
     position: relative;
     display: block;
     width: 85%;
@@ -23,6 +23,7 @@
         content: '';
         display: block;
         position: absolute;
+        left: 0;
         bottom: 0;
         height: 7rem;
         width: 100%;
@@ -35,11 +36,8 @@
     }
 
     &__content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
+        @include position-absolute;
+        @include full-percentages;
         object-fit: cover;
         z-index: -1;
         visibility: hidden;
@@ -50,7 +48,11 @@
 
         &.show {
             visibility: visible;
+            animation: fadein 2s;
         }
     }
 }
+
+
+
 

@@ -18,12 +18,16 @@
     &__title {
         color: $title-color;
         font-weight: 700;
-        font-size: 2.5rem;
+        font-size: 2.6rem;
         margin-bottom: 3rem;
 
         @media (min-width: $breakpoint-medium) {
-            font-size: 4rem;
+            font-size: 5rem;
             margin-bottom: 5rem;
+        }
+
+        @media (min-width: $breakpoint-large) {
+            font-size: 4rem;
         }
 
         @media (min-width: $breakpoint-xlarge) {
@@ -33,8 +37,7 @@
     }
 
     &__illustrations {
-        display: flex;
-        flex-direction: row;
+        @include flex-row;
         justify-content: space-between;
         align-items: center;
         width: 100%;

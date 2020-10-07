@@ -8,26 +8,40 @@
 
     &__title {
         color: $title-color;
-        font-size: 2.5rem;
+        font-size: 2.6rem;
         margin-top: 8rem;
         margin-bottom: 1rem;
 
         @media (min-width: $breakpoint-medium) {
+            font-size: 5rem;
+        }
+
+        @media (min-width: $breakpoint-large) {
             font-size: 4rem;
         }
 
         @media (min-width: $breakpoint-xlarge) {
             margin-top: 6rem;
             margin-bottom: 2rem;
+            font-size: 3rem;
         }
     }
 
     &__paragraph {
         color: $paragraph-color;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         line-height: 2.5rem;
 
+        @media (min-width: $breakpoint-medium) {
+            font-size: 2.6rem;
+            line-height: 4.7rem;
+        }
+
         @media (min-width: $breakpoint-large) {
+            font-size: 2.3rem;
+        }
+
+        @media (min-width: $breakpoint-xlarge) {
             font-size: 1.5rem;
             line-height: 3rem;
         }

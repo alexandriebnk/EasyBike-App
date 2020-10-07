@@ -1,6 +1,5 @@
 .mailing {
-    display: flex;
-    flex-direction: row;
+    @include flex-row;
     justify-content: center;
     height: 5rem;
     width: 90%;

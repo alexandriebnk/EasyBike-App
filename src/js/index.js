@@ -1,7 +1,10 @@
+// Importer fichiers à prendre en compte
 import '../sass/main.scss';
-import Carrousel from './carrousel'
+import Carousel from './carousel'
 import Reservation from './reservation';
 
-new Carrousel();
+
+// Instancier les class indépendantes
+new Carousel();
 new Reservation();
  

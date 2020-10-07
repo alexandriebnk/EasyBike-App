@@ -2,6 +2,7 @@
 /*      RESERVATION     */ 
 /************************/
 
+// Importer les fichiers des class que je dois instancier ici
 import Map from './map';
 import ObjetCanvas from './canvas';
 
@@ -100,6 +101,7 @@ class Reservation {
     // Méthode pour sélectionner station avec vélos disponibles
     selectStation = () => {
         if (this.maMap.currentStation) {
+            // Si vélos disponibles : activation du bouton de résa
             if (this.maMap.currentStation.available_bikes) {
                 this.bikeAvailable = true;
                 this.activateButtonBooking();
@@ -112,8 +114,10 @@ class Reservation {
 
     // Méthode regEx vérification infos user
     checkRegExInput = (input, storageName) => {
+        // Définition du regEx
         let regEx = /^[A-Za-zàäâéèëêïîôùüÿçœ\'-]+$/;
 
+        // Vérification de la bonne valeur rentrée par user
         if (input.value.length == 0) {
             input.style.borderBottom = '1px solid #CACACA';
             this.checkStateInput(false, storageName);
@@ -124,10 +128,12 @@ class Reservation {
         } else {
             input.style.borderBottom = '1px solid #56CCCE';
             input.style.color = '#56CCCE';
+            // Vérification réussie
             this.checkStateInput(true, storageName);
             // Récupérer items (nom/prénom) tapés par USER + localStorage
             localStorage.setItem(storageName, input.value);
         } 
+        // Activation du bouton de résa
         this.activateButtonBooking();
     }
 
@@ -142,6 +148,7 @@ class Reservation {
 
     // Méthode activation bouton réserver
     activateButtonBooking = () => {
+        // Si toutes les conditions sont remplies le bouton est activé
         if (this.correctName == true && this.correctSurname == true && this.bikeAvailable == true && this.bookingArea.style.display != 'flex') {
             this.bookingButton.disabled = false;
             this.bookingButton.style.backgroundColor = '#56CCCE';

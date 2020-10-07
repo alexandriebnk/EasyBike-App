@@ -20,18 +20,18 @@ class ObjetCanvas {
 
     // Méthode pour déclencher événements souris
     activateEvents = () => {
-        // Dès que le User clique sur la souris
+        // Quand user clique sur la souris
         this.canvas.addEventListener('mousedown', (e) => {
             // Changer le booléen qui permet déclenchement de la signature
             this.signatureOk = true;
-            // Suivre la position de la souris pour savoir quand elle se termine
+            // Suivre position de la souris pour savoir la fin du tracé
             this.lastPosition = this.getMousePosition(e);
             // Activer bouton de validation
             this.validationButtonPopin.style.backgroundColor = '#56CCCE';
             this.validationButtonPopin.disabled = false;
         })
     
-        // Dès que le user bouge la souris en étant toujours en mousedown
+        // Quand user bouge la souris en étant toujours en mousedown
         this.canvas.addEventListener('mousemove', (e) => {
             // Enregistrer positon de la souris
             this.mousePosition = this.getMousePosition(e);
@@ -39,7 +39,7 @@ class ObjetCanvas {
             this.canvasSignature();
         })
     
-        // Dès que le User arrête le click prolongé
+        // Quand user arrête le click prolongé
         document.addEventListener('mouseup', (e) => {
             // Changer le booléen qui permet déclenchement de la signature
             this.signatureOk = false;

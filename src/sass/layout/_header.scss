@@ -4,9 +4,8 @@
     width: 100%;
 
     &__nav {
+        @include flex-row;
         position: absolute;
-        display: flex;
-        flex-direction: row;
         justify-content: space-between;
         top: 2%;
         left: 50%;

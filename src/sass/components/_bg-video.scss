@@ -1,16 +1,12 @@
 .bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+    @include position-absolute;
+    @include full-percentages;
     z-index: -1;
     opacity: .9;
     overflow: hidden;
 
     &__content {
-        height: 100%;
-        width: 100%;
+        @include full-percentages;
         object-fit: cover;
 
         @media (min-width: $breakpoint-medium) {

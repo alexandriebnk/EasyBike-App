@@ -1,7 +1,6 @@
-.carrousel__buttons {
+.carousel__buttons {
+    @include flex-row;
     position: absolute;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 82%;
@@ -15,8 +14,7 @@
     }
 
     &-arrows {
-        display: flex;
-        flex-direction: row;
+        @include flex-row;
         justify-content: space-between;
         width: 27%;
 

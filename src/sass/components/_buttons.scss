@@ -1,6 +1,6 @@
 .button {
+    @include flex-row;
     color: $logo-color;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 3.9rem;

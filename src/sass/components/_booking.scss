@@ -1,6 +1,5 @@
 .booking {
-    display: flex;
-    flex-direction: row;
+    @include flex-row;
     width: 90%;
     margin-right: auto;
     margin-left: auto;
@@ -17,8 +16,7 @@
     }
 
     &__state {
-        display: flex;
-        flex-direction: column;
+        @include flex-column;
         width: 73%;
         margin-top: .4rem;
 
@@ -51,8 +49,7 @@
         }
     
         &-userInfos {
-            display: flex;
-            flex-direction: column;
+            @include flex-column;
             margin-top: 1.6rem;
 
             @media (min-width: $breakpoint-medium) {
@@ -67,8 +64,7 @@
     }
 
     &__countdown {
-        display: flex;
-        flex-direction: row;
+        @include flex-row;
         align-items: flex-start;
         justify-content: flex-end;
         width: 27%;
@@ -88,8 +84,7 @@
         }
 
         &-running {
-            display: flex;
-            flex-direction: row;
+            @include flex-row;
 
             @media (min-width: $breakpoint-xlarge) {
                 margin-top: .5rem;
@@ -102,8 +97,7 @@
 
     &__id,
     &__address {
-        display: flex;
-        flex-direction: row;
+        @include flex-row;
         margin-top: 1rem;
     }
 
@@ -112,8 +106,7 @@
     }
 
     &__registered {
-        display: flex;
-        flex-direction: row;
+        @include flex-row;
 
         &-address,
         &-userName,

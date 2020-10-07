@@ -2,6 +2,8 @@
  /*         MAP          */ 
 /************************/
 
+// Importer images qui ne seront pas prises en compte 
+// en les mettant en string dans mon fichier JS
 import stationSvg from '../img/svg/station.svg';
 import stationSvgSelected from '../img/svg/selected-station.svg';
 
@@ -23,7 +25,6 @@ class Map {
 
         // Récupérer les données de l'API JCD
         this.getDataFromApi().then((datasJCD) => {
-
             // Afficher les stations sur la carte
             this.addMarkers(datasJCD);   
         })
@@ -61,9 +62,10 @@ class Map {
         })
     }
             
-    // Méthode pour afficher les markers et les détails de chaque station
+    // Méthode pour afficher les marqueurs et les détails de chaque station
     addMarkers = (datas) => {
         datas.forEach((station) => {
+            // Créer l'icone et l'afficher en place de chaque marqueur
             let stationIcon = L.icon({
                 iconUrl: stationSvg,
                 iconSize: [30, 30],
@@ -71,6 +73,7 @@ class Map {
             });
             let marker = L.marker([station.position.lat, station.position.lng], {icon: stationIcon}).addTo(this.map);
             marker.addEventListener('click', () => {
+                // Pour chaque click, changer l'UI
                 this.changeIcons(marker, station);
                 // Stocker ces datas dans le constructor 
                 this.currentStation = station;
@@ -95,24 +98,25 @@ class Map {
         })
     }
 
-    // Méthode pour créer une icône différent pour selection station par user
+    // Méthode pour créer une icône différente pour selection station par user
     changeIcons = (marker, station) => {
-        // Si une station est déjà sélectionné
+        // Si une station est déjà réservée = ne rien changer
         if (marker === this.reservedMarker) {
             return;
         }
 
+        // Changer l'UI des marqueurs quand user clique dessus
         if (this.activeMarker && this.activeMarker !== this.reservedMarker) {
             let stationIcon = L.icon({
                 iconUrl: stationSvg,
                 iconSize: [30, 30],
                 iconAnchor: [this.activeStation.position.lat, this.activeStation.position.lng] 
             });
-            // Je change celle d'avant en bleu
+            // Changer l'UI du marqueur
             this.activeMarker.setIcon(stationIcon);
         }
 
-        // Dans tous les cas, quand je sélectionne, elle grandit
+        // Dans tous les cas, quand user clique sur marqueur, l'icône s'élargit
         let stationIcon = L.icon({
             iconUrl: stationSvg,
             iconSize: [50, 50],
@@ -120,11 +124,12 @@ class Map {
         });
         marker.setIcon(stationIcon);
 
-        // Le marker en question devient sélectionné
+        // Le marqueur en question devient sélectionné
         this.activeMarker = marker;
         this.activeStation = station;
     }   
 
+    // Méthode pour garder le marqueur de la station réservée
     displayReservedIcon = () => {
         this.reservedStation = this.activeStation;
         this.reservedMarker = this.activeMarker;
