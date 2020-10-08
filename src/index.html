@@ -1,6 +1,6 @@
   
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="author" content="Alexandrie Benkiki">
@@ -16,7 +16,7 @@
         
         <header class="header">
             <div class="header__nav">
-                <p class="header__logo logo">easybike</p>
+                <h2 class="header__logo logo">easybike</h2>
                 <a href="#reservation-anchor" class="button button-top">Réserver</a>
             </div>
             <h1 class="header__text">Un vélo, n'importe où, n'importe quand !</h1>
@@ -62,25 +62,25 @@
         <section class="section-description">
             <div class="locate">
                 <img src="img/svg/map-location.svg" class="locate__icon">
-                <h3 class="locate__title">Parcours la map et repère ta localisation</h3>
+                <h4 class="locate__title">Parcours la map et repère ta localisation</h4>
                 <p class="locate__paragraph">Repère-toi dans la ville grâce à l'icône 
                     turquoise qui apparaît sur la map lors du chargement de la page</p>
             </div>
             <div class="select">
                 <img src="img/svg/bulle-info.svg" class="select__icon">
-                <h3 class="select__title">Sélectionne la station de ton choix</h3>
+                <h4 class="select__title">Sélectionne la station de ton choix</h4>
                 <p class="select__paragraph">Choisis celle qui est la plus proche de 
                     ton lieu actuel pour pouvoir y accéder en toute tranquilité</p>
             </div>
             <div class="signup">
                 <img src="img/svg/calendar.svg" class="signup__icon">
-                <h3 class="signup__title">Inscris-toi pour réserver ton vélo</h3>
+                <h4 class="signup__title">Inscris-toi pour réserver ton vélo</h4>
                 <p class="signup__paragraph">Reseigne tes informations personnelles 
                     pour que la réservation de ton vélo soit bien prise en compte</p>
             </div>
             <div class="get">
                 <img src="img/svg/bike.svg" class="get__icon">
-                <h3 class="get__title">Tu as 20min pour récupérer ton vélo !</h3>
+                <h4 class="get__title">Tu as 20min pour récupérer ton vélo !</h4>
                 <p class="get__paragraph">Ne traîne pas trop : une fois le 
                     timer terminé, la réservation n'est malheureusement plus valide</p>
             </div>
@@ -90,7 +90,7 @@
             <div id="popin__overlay">
                 <div class="popin" id="popin">
                     <div class="popin__text">
-                        <p class="popin__text-title">Confirmation</p>
+                        <h3 class="popin__text-title">Confirmation</h3>
                         <p class="popin__text-paragraph">Pour réserver dès maintenant votre vélo, et pour des raisons de sécurité évidentes,
                             votre signature est requise !</p>
                     </div>
@@ -102,9 +102,13 @@
                 <h3 class="reservation__title">Réservation</h3>
                 <div class="reservation__illustrations">
                     <img src="img/svg/bike-image.svg" class="reservation__illustrations-image">
-                    <div class="reservation__illustrations-number" id="js-reservation__illustrations-number">0</div>
+                    <div class="reservation__illustrations-number">
+                        <h4 id="js-reservation__illustrations-number">0</h4>
+                    </div>
                 </div>
-                <div class="reservation__address" id="js-reservation__address">Adresse de la station</div>
+                <div class="reservation__address">
+                    <h4 id="js-reservation__address">Adresse de la station</h4>
+                </div>
                 <form action="#" method="get" class="form">
                     <div class="form__surname">
                         <label for="form__surname-input"></label>
@@ -136,14 +140,14 @@
         </section>
 
         <footer class="footer">
-            <p class="footer__logo logo">easybike</p>
+            <h2 class="footer__logo logo">easybike</h2>
             <p class="footer__copyright">©2020 Easybike</p>
         </footer>
 
         <section class="section-booking" id="section-booking">
             <div class="booking">
                 <div class="booking__state">
-                    <p class="booking__state-inProgress">Réservation en cours</p>
+                    <h4 class="booking__state-inProgress">Réservation en cours</h4>
                     <div class="booking__state-userInfos">
                         <div id="userInfos__address">
                             <img src="img/svg/address.svg" id="userInfos__icon">
