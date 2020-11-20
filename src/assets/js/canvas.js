@@ -47,7 +47,8 @@ class ObjetCanvas {
     }
     
     // Méthode pour renvoyer les coordonnées de la souris 
-    getMousePosition(mouseEvent) {
+    getMousePosition = (mouseEvent) => {
+        console.log("1")
         // Si on enregistre une 'mouseDown'
         if (this.signatureOk) {
             // Variable qui définit la taille du canvas 
@@ -62,7 +63,8 @@ class ObjetCanvas {
     }
     
     // Méthode pour signer sur canvas
-    canvasSignature() {
+    canvasSignature = () => {
+        console.log("2")
         // Si on enregistre une 'mouseDown'
         if (this.signatureOk) {
             // Construction de la zone du canvas + définition du style
