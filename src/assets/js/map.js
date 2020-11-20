@@ -4,8 +4,8 @@
 
 // Importer images qui ne seront pas prises en compte 
 // en les mettant en string dans mon fichier JS
-import stationSvg from '../img/svg/station.svg';
-import stationSvgSelected from '../img/svg/selected-station.svg';
+import stationSvg from '../svg/station.svg';
+import stationSvgSelected from '../svg/selected-station.svg';
 
 class Map {
     constructor() {
