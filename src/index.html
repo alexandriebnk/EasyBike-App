@@ -7,9 +7,11 @@
         <meta name="description" content="Application de réservation de vélo">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin=""/>
+        <link rel="icon" href="./files/img/easybike-favicon-32x32.png" type="image/png" data-res="32x32">
+    <link rel="icon" href="./files/img/easybike-favicon-16x16.png" type="image/png" data-res="16x16">
         <title>EasyBike</title>
     </head>
     <body>
@@ -61,25 +63,25 @@
 
         <section class="section-description">
             <div class="locate">
-                <img src="./files/svg/map-location.svg" class="locate__icon">
+                <img src="./files/svg/map-location.svg" class="locate__icon" alt="map location">
                 <h4 class="locate__title">Parcours la map et repère ta localisation</h4>
                 <p class="locate__paragraph">Repère-toi dans la ville grâce à l'icône 
                     turquoise qui apparaît sur la map lors du chargement de la page</p>
             </div>
             <div class="select">
-                <img src="./files/svg/bulle-info.svg" class="select__icon">
+                <img src="./files/svg/bulle-info.svg" class="select__icon" alt="bulle info">
                 <h4 class="select__title">Sélectionne la station de ton choix</h4>
                 <p class="select__paragraph">Choisis celle qui est la plus proche de 
                     ton lieu actuel pour pouvoir y accéder en toute tranquilité</p>
             </div>
             <div class="signup">
-                <img src="./files/svg/calendar.svg" class="signup__icon">
+                <img src="./files/svg/calendar.svg" class="signup__icon" alt="calendar">
                 <h4 class="signup__title">Inscris-toi pour réserver ton vélo</h4>
                 <p class="signup__paragraph">Reseigne tes informations personnelles 
                     pour que la réservation de ton vélo soit bien prise en compte</p>
             </div>
             <div class="get">
-                <img src="./files/svg/bike.svg" class="get__icon">
+                <img src="./files/svg/bike.svg" class="get__icon" alt="bike">
                 <h4 class="get__title">Tu as 20min pour récupérer ton vélo !</h4>
                 <p class="get__paragraph">Ne traîne pas trop : une fois le 
                     timer terminé, la réservation n'est malheureusement plus valide</p>
@@ -98,10 +100,10 @@
                     <button id="popin__validation">Valider</button>
                 </div>
            </div>
-            <div name="reservation-anchor" id="reservation-anchor" class="reservation">
+            <div id="reservation-anchor" class="reservation">
                 <h3 class="reservation__title">Réservation</h3>
                 <div class="reservation__illustrations">
-                    <img src="./files/svg/bike-image.svg" class="reservation__illustrations-image">
+                    <img src="./files/svg/bike-image.svg" class="reservation__illustrations-image" alt="bike image">
                     <div class="reservation__illustrations-number">
                         <h4 id="js-reservation__illustrations-number">0</h4>
                     </div>
@@ -150,11 +152,11 @@
                     <h4 class="booking__state-inProgress">Réservation en cours</h4>
                     <div class="booking__state-userInfos">
                         <div id="userInfos__address">
-                            <img src="./files/svg/address.svg" id="userInfos__icon">
+                            <img src="./files/svg/address.svg" id="userInfos__icon_address" alt="address">
                             <p id="userInfos__registered-address"></p>
                         </div>
                         <div id="userInfos__id">
-                            <img src="./files/svg//user.svg" id="userInfos__icon">
+                            <img src="./files/svg/user.svg" id="userInfos__icon_user" alt="user">
                             <div id="userInfos__registered">
                                 <p id="userInfos__registered-userName"></p>
                                 <p id="userInfos__registered-userSurname"></p>
@@ -163,7 +165,7 @@
                     </div>
                 </div>
                 <div class="booking__countdown">
-                    <img src="./files/svg/countdown.svg" class="booking__countdown-icon">
+                    <img src="./files/svg/countdown.svg" class="booking__countdown-icon" alt="countdown">
                     <div class="booking__countdown-running">
                         <p id="minutes-paragraph"></p>
                         <p id="separation-pts">:</p>
